@@ -14,9 +14,8 @@ main = do
     -- part 1
     putStr $ show $ getTriangles (getGraph contents) (getTNodes contents)
     putStr "\n"
-    let g = getGraph contents in let cs = getMaxCliques g [] (G.vertexList g) [] in putStr $ intercalate "," $ sort $ maximumBy (compare `on` length) cs
     -- part 2
-    --let digits = map (getNextSecretDigitNMemo 2000 . read) (lines contents) in putStr $ show $ sum $ map (getBananaFromPattern $ mode $ mergeSeqMaps $ map getSeqs digits) digits
+    let g = getGraph contents in let cs = getMaxCliques g [] (G.vertexList g) [] in putStr $ intercalate "," $ sort $ maximumBy (compare `on` length) cs
     putStr "\n"
     hClose handle
 
