@@ -1,19 +1,18 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import DijkstraSimple2 (Node, findShortestDistance, graphFromList, fromDistance)
+import DijkstraSimple ( findShortestDistance, fromDistance, graphFromList )
 import Data.List.Split (splitOn)
 import qualified Data.Bifunctor
 
 main :: IO ()
 main = do
-    handle <- openFile "18.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "18.txt"
+    let b = getBlocks contents
+    let g = getGraph (take 1024 $ getBlocks contents) (genGrid 70 70)
     -- part 1
-    putStr $ show $ fromDistance $ findShortestDistance (graphFromList $ getGraph (take 1024 $ getBlocks contents) (genGrid 70 70) ) (0,0) (70,70)
-    putStr "\n"
+    print $ fromDistance $ findShortestDistance (graphFromList g) (0,0) (70,70)
     -- part 2
-    let b = getBlocks contents in let g = getGraph (take 1024 $ getBlocks contents) (genGrid 70 70) in putStr $ show $ firstblock (drop 1024 b) g
-    putStr "\n"
-    hClose handle
+    print $ firstblock (drop 1024 b) g
+
+type Node = (Int,Int)
 
 getBlocks :: String -> [(Int,Int)]
 getBlocks s = map (\x -> let [a,b] = splitOn "," x in (read a, read b)) $ lines s

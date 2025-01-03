@@ -1,18 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.List.Split (splitOn)
 
 main :: IO ()
 main = do
-    handle <- openFile "13.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "13.txt"
     -- part 1
-    putStr $ show $ sum $ map (getTokens . readPart) $ splitOn "\n\n" contents
-    putStr "\n"
+    print $ sum $ map (getTokens . readPart) $ splitOn "\n\n" contents
     -- part 2
-    putStr $ show $ sum $ map (getTokens' . readPart') $ splitOn "\n\n" contents
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map (getTokens' . readPart') $ splitOn "\n\n" contents
+    
 readPart :: String -> ((Int, Int), (Int, Int), (Int, Int)) 
 readPart s = let a:b:c:cs = lines s in ((read $ take 2 $ drop 12 a, read $ take 2 $ drop 18 a),(read $ take 2 $ drop 12 b, read $ take 2 $ drop 18 b),(read $ takeWhile (/= ',') $ drop 9 c, read $ drop 2 $ dropWhile (/= 'Y') c))
 

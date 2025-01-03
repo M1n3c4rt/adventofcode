@@ -1,21 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate, sortBy)
-import Data.Function (on)
 import qualified Data.HashMap.Strict as HM
-import Data.MemoUgly (memo)
 
 main :: IO ()
 main = do
-    handle <- openFile "20.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "20.txt"
     -- part 1
-    let g = getGraph $ lines contents in putStr $ show $ getCheats 2 100 g
-    putStr "\n"
+    let g = getGraph $ lines contents in print $ getCheats 2 100 g
     -- part 2
-    let g = getGraph $ lines contents in putStr $ show $ getCheats 20 100 g
-    putStr "\n"
-    hClose handle
-
+    let g = getGraph $ lines contents in print $ getCheats 20 100 g
+    
 type Node = (Int,Int)
 
 enumerate :: [[a]] -> [(Int,Int,a)]

@@ -1,24 +1,17 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate, sortBy)
-import Data.Function (on)
-import qualified Data.HashMap.Strict as HM
+
 import Data.MemoUgly (memo)
+import qualified Data.HashMap.Strict as HM
 import qualified Data.Hashable as HM
 
-main :: IO ()
+main :: IO [()]
 main = do
-    handle <- openFile "21.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "21.txt"
     -- part 1
-    putStr $ show $ sum $ map (\x -> read (init x) * getShortestPaths numericMap (2,'A':x)) $ lines contents
-    putStr "\n"
+    print $ sum $ map (\x -> read (init x) * getShortestPaths numericMap (2,'A':x)) $ lines contents
     -- part 2
-    putStr $ show $ sum $ map (\x -> read (init x) * getShortestPaths numericMap (25,'A':x)) $ lines contents
-    putStr "\n"
+    print $ sum $ map (\x -> read (init x) * getShortestPaths numericMap (25,'A':x)) $ lines contents
     --keep going!
-    putStr $ intercalate "\n" $ map (\y -> show (y `div` 2) ++ ": " ++ show (sum $ map (\x -> read (init x) * getShortestPaths numericMap (y `div` 2,'A':x)) $ lines contents)) [2..]
-    putStr "\n"
-    hClose handle
+    mapM (putStrLn . (\y -> show (y `div` 2) ++ ": " ++ show (sum $ map (\x -> read (init x) * getShortestPaths numericMap (y `div` 2,'A':x)) $ lines contents))) [25..]
 
 type Dir = (Int,Int)
 type Cell = (Int,Int)

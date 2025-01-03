@@ -1,17 +1,14 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (nub)
+import Data.List ( nub )
 
 main :: IO ()
 main = do
-    handle <- openFile "8.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "8.txt"
+    let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    let pairs x = pick2 $ getAnts x $ enumerate' $ lines contents
     -- part 1
-    putStr $ show $ length $ nub $ concatMap (\x -> concatMap (antiNodes (length $ lines contents)) (pick2 $ getAnts x $ enumerate' $ lines contents)) "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    putStr "\n"
+    print $ length $ nub $ concatMap (concatMap (antiNodes (length $ lines contents)) . pairs) chars
     -- part 2
-    putStr $ show $ length $ nub $ concatMap (\x -> concatMap (antiNodes' (length $ lines contents)) (pick2 $ getAnts x $ enumerate' $ lines contents)) "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    putStr "\n"
-    hClose handle
+    print $ length $ nub $ concatMap (concatMap (antiNodes' (length $ lines contents)) . pairs) chars
 
 enumerate :: [Char] -> [(Int, Char)]
 enumerate (l:ls) = (0,l):map (\x -> (fst x + 1, snd x)) (enumerate ls)

@@ -1,19 +1,15 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.Char (digitToInt)
 import Data.List (intercalate)
 
 main :: IO ()
 main = do
-    handle <- openFile "9.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "9.txt"
+    let (x,y) = (getZipsA contents, getZipsB contents)
     -- part 1
-    let (x,y) = (getZipsA contents, getZipsB contents) in putStr $ show $ foldS 0 (length x - 1) x y (length x) (length y) 0 (last x)
-    putStr "\n"
+    print $ foldS 0 (length x - 1) x y (length x) (length y) 0 (last x)
     -- part 2
-    let (x,y) = (getZipsA contents, getZipsB contents) in putStr $ show $ checkSum 0 $ foldS' (zip3 [0..] (reverse x) (y++[0])) $ reverse (zip3 [0..] (reverse x) (y++[0]))
-    putStr "\n"
-    hClose handle
-
+    print $ checkSum 0 $ foldS' (zip3 [0..] (reverse x) (y++[0])) $ reverse (zip3 [0..] (reverse x) (y++[0]))
+    
 f :: Int -> Int -> Int -> Int
 f a b 0 = 0
 f a b c = a*b + f a (b + 1) (c - 1)
@@ -74,9 +70,11 @@ add p (q:qs)
     | thd3 q >= snd3 p = [(fst3 q, snd3 q, 0),(fst3 p, snd3 p, thd3 q - snd3 p)] ++ qs 
     | otherwise = q:add p qs
 
+checkSum :: Int -> [(Int, Int, Int)] -> Int
 checkSum n (l:ls) = f (fst3 l) n (snd3 l) + checkSum (n+snd3 l+thd3 l) ls
 checkSum n [] = 0
 
+filter' :: ((Int, Int, Int) -> Bool) -> [(Int, Int, Int)] -> [(Int, Int, Int)]
 filter' f [] = []
 filter' f [x]
     | f x = []

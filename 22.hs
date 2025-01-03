@@ -1,25 +1,15 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate, sortBy, group, sort, maximumBy)
 import Data.MemoUgly (memo)
 import Data.Bits ( Bits(shift, xor) )
-import Text.ParserCombinators.ReadP (get)
-import Data.Function (on)
 import qualified Data.HashMap.Strict as HM
 
 main :: IO ()
 main = do
-    handle <- openFile "22.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "22.txt"
     -- part 1
-    putStr $ show $ sum $ map (getNextSecretNMemo 2000 . read) (lines contents)
-    putStr "\n"
+    print $ sum $ map (getNextSecretNMemo 2000 . read) (lines contents)
     -- part 2
-    let digits = map (getNextSecretDigitNMemo 2000 . read) (lines contents) in putStr $ show $ sum $ map (getBananaFromPattern $ mode $ mergeSeqMaps $ map getSeqs digits) digits
-    putStr "\n"
-    hClose handle
-
-allSeqs :: [(Int,Int,Int,Int)]
-allSeqs = [(a,b,c,d) | a <- [-18..18], b <- [-18..18], c <- [-18..18], d <- [-18..18]]
+    let digits = map (getNextSecretDigitNMemo 2000 . read) (lines contents)
+    print $ sum $ map (getBananaFromPattern $ mode $ mergeSeqMaps $ map getSeqs digits) digits
 
 getNextSecretNMemo :: Int -> Int -> Int
 getNextSecretNMemo = memo getNextSecretN

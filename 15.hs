@@ -1,20 +1,16 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (findIndex, elemIndex, intercalate, nub, sortOn)
-import Data.Maybe (fromMaybe)
-import Data.List.Split (splitOn)
+import Data.List ( elemIndex, findIndex, nub, sortOn )
+import Data.Maybe ( fromMaybe ) 
+import Data.List.Split ( splitOn )
 
 main :: IO ()
 main = do
-    handle <- openFile "15.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "15.txt"
+    let [grid,stream] = splitOn "\n\n" contents
     -- part 1
-    let [grid,stream] = splitOn "\n\n" contents in putStr $ show $ getGPS 0 $ moveAll (lines grid) (filter (/= '\n') stream)
-    putStr "\n"
+    print $ getGPS 0 $ moveAll (lines grid) (filter (/= '\n') stream)
     -- part 2
-    let [grid,stream] = splitOn "\n\n" contents in putStr $ show $ getGPSM 0 $ moveAll' (map expandGrid $ lines grid) (filter (/= '\n') stream)
-    putStr "\n"
-    hClose handle
-
+    print $ getGPSM 0 $ moveAll' (map expandGrid $ lines grid) (filter (/= '\n') stream)
+    
 expandGrid :: [Char] -> [Char]
 expandGrid (s:ss)
     | s == '.' = ".."++expandGrid ss

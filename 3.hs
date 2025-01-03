@@ -1,19 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.List.Split ( splitOn )
-import Text.ParserCombinators.ReadP (get)
 
 main :: IO ()
 main = do
-    handle <- openFile "3.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "3.txt"
     -- part 1
-    putStr $ show $ sum $ map getTwoDigits $ mulsplit contents
-    putStr "\n"
+    print $ sum $ map getTwoDigits $ mulsplit contents
     -- part 2
-    putStr $ show $ sum $ map getTwoDigits $ mulsplit $ spl contents
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map getTwoDigits $ mulsplit $ spl contents
+    
 getNumbers :: String -> [Int]
 getNumbers s = map read $ words s :: [Int]
 spl :: String -> String

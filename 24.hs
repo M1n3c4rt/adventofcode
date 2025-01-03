@@ -1,23 +1,15 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate, sortBy, group, sort, maximumBy, union, intersect, (\\))
-import Data.MemoUgly (memo)
-import Data.Function (on)
+import Data.List ( sort, sortOn )
 import qualified Data.HashMap.Strict as HM
-import qualified Algebra.Graph.Undirected as G
-import Data.List.Split (splitOn)
-import qualified Data.Set as S
+import Data.List.Split ( splitOn )
 
 main :: IO ()
 main = do
-    handle <- openFile "24.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "24.txt"
+    let (bits,gates) = getBoth contents
     -- part 1
-    let (bits,gates) = getBoth contents in putStr $ show $ getFinal $ simplify bits [] gates
-    putStr "\n"
+    print $ getFinal $ simplify bits [] gates
     -- part 2 (did this manually)
-    putStr "fgt,fpq,nqk,pcp,srn,z07,z24,z32"
-    putStr "\n"
-    hClose handle
+    putStrLn "fgt,fpq,nqk,pcp,srn,z07,z24,z32"
 
 data Gate = XOR | AND | OR | NONE deriving (Read,Show)
 data Tree a = End a | Node a (Tree a) (Tree a) deriving (Read,Show)
@@ -93,20 +85,6 @@ prettyPrint indent tree = case tree of
 getTreeNum :: Tree (String,Gate) -> Int
 getTreeNum (Node a (End (p, NONE)) (End (q, NONE))) = read $ tail p
 getTreeNum tree = 0
-
-findDiscrepancy :: Tree (String, Gate) -> Maybe String
-findDiscrepancy tree = case tree of
-    Node ("z00", g) ta tb -> Nothing
-    Node ("z45", g) ta tb -> Nothing
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (End (x, NONE)) (End (y, NONE)))) (Node (t, XOR) (End (x', NONE)) (End (y', NONE))) -> Nothing
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (Node (x, g) tb tc) (End (y, NONE)))) (Node (t, XOR) (End (x', NONE)) (End (y', NONE))) -> Just x
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (End (x, NONE)) (Node (y, g) tb tc))) (Node (t, XOR) (End (x', NONE)) (End (y', NONE))) -> Just x
-    Node (a,XOR) (Node (s, OR) ta (Node (q, g) tb tc)) (Node (t, XOR) (End (x', NONE)) (End (y', NONE))) -> Just q
-    Node (a,XOR) (Node (s, g) ta tb) (Node (t, XOR) (End (x', NONE)) (End (y', NONE))) -> Just s
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (End (x, NONE)) (End (y, NONE)))) (Node (t, XOR) (Node (x', g) tb tc) (End (y', NONE))) -> Just x'
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (End (x, NONE)) (End (y, NONE)))) (Node (t, XOR) (End (x', NONE)) (Node (y', g) tb tc)) -> Just y'
-    Node (a,XOR) (Node (s, OR) ta (Node (q, AND) (End (x, NONE)) (End (y, NONE)))) (Node (t, g) tb tc) -> Just t
-    Node (a,g) ta tb -> Just a
 
 evaluateTree :: HM.HashMap String Bool -> Tree (String,Gate) -> Bool
 evaluateTree bits tree = case tree of

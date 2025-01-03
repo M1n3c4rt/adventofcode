@@ -1,16 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 
 main :: IO ()
 main = do
-    handle <- openFile "12.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "12.txt"
+    let l = readContents 0 $ lines contents
+    let regions = concatMap (spl [] . (`getByChar` l)) ['A'..'Z']
     -- part 1
-    let l = readContents 0 $ lines contents in putStr $ show $ sum $ map (\x -> length x * perim x) $ concatMap (spl [] . (`getByChar` l)) "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    putStr "\n"
+    print $ sum $ map (\x -> length x * perim x) regions
     -- part 2
-    let l = readContents 0 $ lines contents in putStr $ show $ sum $ map (\x -> length x * perim' x) $ concatMap (spl [] . (`getByChar` l)) "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    putStr "\n"
-    hClose handle
+    print $ sum $ map (\x -> length x * perim' x) regions
 
 spl :: [[(Int,Int)]] -> [(Int,Int)] -> [[(Int,Int)]]
 spl ls (p:ps) = let (a,b) = filter2 (any (neighbour p)) ls in spl ((p:concat a):b) ps

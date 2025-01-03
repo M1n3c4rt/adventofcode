@@ -1,19 +1,15 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List.Split (splitOn)
-import Data.Bits (xor)
+
+import Data.List.Split ( splitOn )
+import Data.Bits ( Bits(xor) )
 import Data.List (intercalate)
 
 main :: IO ()
 main = do
-    handle <- openFile "17.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "17.txt"
     -- part 1
-    putStr $ intercalate "," $ map show $ reverse $ process $ getInfo contents
-    putStr "\n"
+    putStrLn $ intercalate "," $ map show $ reverse $ process $ getInfo contents
     -- part 2
-    putStr $ show $ minimum $ genNumber $ getInsts contents
-    putStr "\n"
-    hClose handle
+    print $ minimum $ genNumber $ getInsts contents
 
 type Pointer = Int
 type Out = [Int]

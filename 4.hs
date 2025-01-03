@@ -1,18 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (transpose, sort)
+import Data.List ( sort, transpose )
 
 main :: IO ()
 main = do
-    handle <- openFile "4.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "4.txt"
     -- part 1
-    putStr $ show $ fullSearch $ lines contents
-    putStr "\n"
+    print $ fullSearch $ lines contents
     -- part 2
-    putStr $ show $ fullSearch' $ lines contents
-    putStr "\n"
-    hClose handle
-
+    print $ fullSearch' $ lines contents
+    
 searchHorizontal :: String -> Int
 searchHorizontal s
     | length s < 4 = 0

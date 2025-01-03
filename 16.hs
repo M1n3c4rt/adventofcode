@@ -1,20 +1,16 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate)
-import Data.Function (on)
-import DijkstraSimple ( findShortestDistance, Node, graphFromList, findShortestPaths, graph1, fromDistance )
+import Data.List ( nub )
+import DijkstraSimple ( findShortestDistance,findShortestPaths,fromDistance,graphFromList )
 
 main :: IO ()
 main = do
-    handle <- openFile "16.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "16.txt"
+    let g = graphFromList $ getGraph $ lines contents
     -- part 1
-    let g = graphFromList $ getGraph $ lines contents in putStr $ show $ fromDistance (findShortestDistance g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1))
-    putStr "\n"
+    print $ fromDistance (findShortestDistance g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1))
     -- part 2
-    let g = graphFromList $ getGraph $ lines contents in putStr $ show $ length $ nub $ concatMap (padL . fst) $ findShortestPaths g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1)
-    putStr "\n"
-    hClose handle
+    print $ length $ nub $ concatMap (padL . fst) $ findShortestPaths g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1)
 
+type Node = (Int,Int,Int,Int)
 type Path = (Int,[Node])
 
 pad :: Node -> Node -> [(Int,Int)]

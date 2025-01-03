@@ -1,19 +1,16 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
+
 import Data.List (nub)
 import Data.Char (digitToInt)
 
 main :: IO ()
 main = do
-    handle <- openFile "10.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "10.txt"
+    let l = readContents contents
     -- part 1
-    let l = readContents contents in putStr $ show $ sum $ map (step (length l) 0 l) $ nest $ findZeroes' 0 l
-    putStr "\n"
+    print $ sum $ map (step (length l) 0 l) $ nest $ findZeroes' 0 l
     -- part 2
-    let l = readContents contents in putStr $ show $ sum $ map (step' (length l) 0 l) $ nest $ findZeroes' 0 l
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map (step' (length l) 0 l) $ nest $ findZeroes' 0 l
+    
 step :: Int -> Int -> [[Int]] -> [(Int,Int)] -> Int
 step k 9 l' l = length l
 step k n l' l = step k (n+1) l' $ nub $ filter (\x -> l' !! fst x !! snd x == n+1) $ clip k $ concatMap neighbours l

@@ -3,16 +3,13 @@ import Data.List ( sort, transpose, intercalate )
 
 main :: IO ()
 main = do
-    handle <- openFile "6.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "6.txt"
+    let grid = step $ rotateCW $ lines contents
     -- part 1
-    putStr $ show $ sum $ map (numAppearances "1234") $ step $ rotateCW $ lines contents
-    putStr "\n"
+    print $ sum $ map (numAppearances "1234") grid
     -- part 2
-    putStr $ show $ length $ filter (any ('E' `elem`)) $ map (step . replGuard' (rotateCW $ lines contents)) $ genLists' $ rotateCCW $ step $ rotateCW $ lines contents
-    putStr "\n"
-    hClose handle
-
+    print $ length $ filter (any ('E' `elem`)) $ map (step . replGuard' (rotateCW $ lines contents)) $ genLists' $ rotateCCW grid
+    
 replaceX :: String -> String
 replaceX (s:ss)
     | all (`notElem` (s:ss)) "^BCD" = s:ss
@@ -61,6 +58,7 @@ genLists (s:ss)
     | otherwise = map (s:) $ genLists ss
 genLists "" = [""]
 
+genLists' :: [[Char]] -> [[[Char]]]
 genLists' (l:ls) = map (:map removeX ls) (init $ genLists l) ++ map (removeX l:) (genLists' ls)
 genLists' [] = [[]]
 
@@ -74,6 +72,7 @@ replGuard' (p:ps) (q:qs)
     | '^' `elem` p = replGuard p q:qs
     | otherwise = q:replGuard' ps qs
 
+removeX :: [Char] -> [Char]
 removeX (s:ss)
     | s `elem` "1234" = '.':removeX ss
     | otherwise = s:removeX ss

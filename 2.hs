@@ -1,18 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.List ( sort )
 
 main :: IO ()
 main = do
-    handle <- openFile "2.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "2.txt"
     -- part 1
-    putStr $ show $ foldl (flip ((+) . fromEnum)) 0 $ map (getSafe . getNumbers) (lines contents)
-    putStr "\n"
+    print $ foldl (flip ((+) . fromEnum)) 0 $ map (getSafe . getNumbers) (lines contents)
     -- part 2
-    putStr $ show $ foldl (flip ((+) . fromEnum)) 0 $ map (damp . getNumbers) (lines contents)
-    putStr "\n"
-    hClose handle
-
+    print $ foldl (flip ((+) . fromEnum)) 0 $ map (damp . getNumbers) (lines contents)
+    
 getNumbers :: String -> [Int]
 getNumbers s = map read $ words s :: [Int]
 

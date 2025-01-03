@@ -1,7 +1,5 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (sortOn, nub, nubBy, minimumBy, intercalate, sortBy, group, sort, maximumBy, union, intersect, (\\))
-import Data.MemoUgly (memo)
-import Data.Function (on)
+import Data.List ( maximumBy, intercalate, intersect, nub, sort, union )
+import Data.Function ( on )
 import qualified Data.HashMap.Strict as HM
 import qualified Algebra.Graph.Undirected as G
 import Data.List.Split (splitOn)
@@ -9,15 +7,13 @@ import qualified Data.Set as S
 
 main :: IO ()
 main = do
-    handle <- openFile "23.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "23.txt"
+    let g = getGraph contents
+    let cs = getMaxCliques g [] (G.vertexList g) []
     -- part 1
-    putStr $ show $ getTriangles (getGraph contents) (getTNodes contents)
-    putStr "\n"
+    print $ getTriangles (getGraph contents) (getTNodes contents)
     -- part 2
-    let g = getGraph contents in let cs = getMaxCliques g [] (G.vertexList g) [] in putStr $ intercalate "," $ sort $ maximumBy (compare `on` length) cs
-    putStr "\n"
-    hClose handle
+    putStrLn $ intercalate "," $ sort $ maximumBy (compare `on` length) cs
 
 getGraph :: String -> G.Graph String
 getGraph = G.edges . map ((\[x,y] -> (x,y)) . splitOn "-") . lines
@@ -42,7 +38,3 @@ choose2 [] = []
 
 choose2S :: Ord a => S.Set a -> S.Set (a,a)
 choose2S = S.fromList . choose2 . S.toList
-
-choose3 :: [a] -> [(a,a,a)]
-choose3 (x:xs) = map (\(a,b) -> (x,a,b)) (choose2 xs) ++ choose3 xs
-choose3 [] = []

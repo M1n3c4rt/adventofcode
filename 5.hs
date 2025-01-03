@@ -1,20 +1,17 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List (transpose, sort, sortBy, sortOn)
+
+import Data.List ( sortOn )
 import Data.List.Split ( splitOn, splitOneOf )
 import qualified Data.Bifunctor
 
 main :: IO ()
 main = do
-    handle <- openFile "5.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "5.txt"
+    let (l,u) = format contents
     -- part 1
-    let (l,u) = format contents in putStr $ show $ sum $ map getMiddle $ filter (\x -> sortUpdate l x == x) u
-    putStr "\n"
+    print $ sum $ map getMiddle $ filter (\x -> sortUpdate l x == x) u
     -- part 2
-    let (l,u) = format contents in putStr $ show $ sum $ map (getMiddle . sortUpdate l) $ filter (\x -> sortUpdate l x /= x) u
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map (getMiddle . sortUpdate l) $ filter (\x -> sortUpdate l x /= x) u
+    
 getNumbers :: String -> [Int]
 getNumbers s = map read $ splitOneOf "|," s :: [Int]
 tuplify2 :: [a] -> (a, a)

@@ -1,19 +1,15 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.List.Split (splitOn)
 import Data.MemoUgly (memo)
 
 main :: IO ()
 main = do
-    handle <- openFile "19.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "19.txt"
+    let (patterns,towels) = getTowels contents
     -- part 1
-    let (patterns,towels) = getTowels contents in putStr $ show $ length $ filter id $ map (\x -> getPatternMemo (patterns,x)) towels
-    putStr "\n"
+    print $ length $ filter id $ map (\x -> getPatternMemo (patterns,x)) towels
     -- part 2
-    let (patterns,towels) = getTowels contents in putStr $ show $ sum $ map (\x -> getPatternsMemo (patterns,x)) towels
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map (\x -> getPatternsMemo (patterns,x)) towels
+    
 type Pattern = String
 type Towel = String
 

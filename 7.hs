@@ -1,19 +1,14 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.List.Split (splitOn)
-import Control.Monad (foldM)
 
 main :: IO ()
 main = do
-    handle <- openFile "7.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "7.txt"
+    let numbers = map getNumbers $ lines contents
     -- part 1
-    putStr $ show $ sum $ map fst $ filter (\x -> fst x `elem` uncurry f x) $ map getNumbers $ lines contents
-    putStr "\n"
+    print $ sum $ map fst $ filter (\x -> fst x `elem` uncurry f x) numbers
     -- part 2
-    putStr $ show $ sum $ map fst $ filter (\x -> fst x `elem` uncurry g x) $ map getNumbers $ lines contents
-    putStr "\n"
-    hClose handle
-
+    print $ sum $ map fst $ filter (\x -> fst x `elem` uncurry g x) numbers
+    
 getNumbers :: String -> (Int, [Int])
 getNumbers s = let [a,b] = splitOn ":" s in (read a, map read $ words b)
 

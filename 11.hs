@@ -1,22 +1,17 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
 import Data.MemoUgly ( memo )
 import Data.List (intercalate)
 
 main :: IO ()
 main = do
-    handle <- openFile "11.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "11.txt"
+    let l = getNumbers contents
     -- part 1
-    putStr $ show $ sum $ map (\x -> blinkMemo (25,x)) $ getNumbers contents
-    putStr "\n"
+    print $ sum $ map (\x -> blinkMemo (25,x)) l
     -- part 2
-    putStr $ show $ sum $ map (\x -> blinkMemo (75,x)) $ getNumbers contents
-    putStr "\n"
+    print $ sum $ map (\x -> blinkMemo (75,x)) l
     -- keep going!
-    let l = getNumbers contents in putStr $ intercalate "\n" $ zipWith (curry (\x -> show (fst x) ++ ": " ++ show (snd x))) [75..] (map (\x -> sum $ map (\y -> blinkMemo (x,y)) l) [75..])
-    putStr "\n"
-    hClose handle
-
+    putStr $ intercalate "\n" $ zipWith (curry (\x -> show (fst x) ++ ": " ++ show (snd x))) [75..] (map (\x -> sum $ map (\y -> blinkMemo (x,y)) l) [75..])
+    
 blink :: (Integer,Integer) -> Integer
 blink (0,k) = 1
 blink (n,k) = sum $ map (\x -> blinkMemo (n-1,x)) $ blinkOne k

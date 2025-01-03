@@ -1,20 +1,13 @@
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.Char (toUpper)
-import Data.List (sort, elemIndex, transpose, sortOn)
-import Data.Maybe (fromJust)
-import Control.Applicative (liftA2)
+import Data.List ( sort, transpose )
 
 main :: IO ()
 main = do
-    handle <- openFile "1.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "1.txt"
+    let parsed = transpose $ map getNumbers $ lines contents
     -- part 1
-    putStr $ show $ f $ transpose $ map getNumbers $ lines contents
-    putStr "\n"
+    print $ f parsed
     -- part 2
-    putStr $ show $ g $ transpose $ map getNumbers $ lines contents
-    putStr "\n"
-    hClose handle
+    print $ g parsed
 
 getNumbers :: String -> [Int]
 getNumbers s = map read $ words s :: [Int]
