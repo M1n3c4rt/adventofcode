@@ -10,7 +10,6 @@ main = do
     let pipe = findPipe network (Ring [] (findS grid) [])
     -- part 1
     print $ lengthr pipe
-    --print $ take 5000 $ drop 30000 $ expandPipe $ mergeRing pipe
     -- part 2
     print $ S.size $ S.filter (\(x,y) -> even x && even y) $ floodFill (S.singleton (140,140)) S.empty $ S.fromList $ expandPipe $ mergeRing pipe
 
