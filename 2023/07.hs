@@ -2,7 +2,7 @@ import Data.List (sort, sortOn, nub)
 
 main :: IO ()
 main = do
-    contents <- readFile "7.txt"
+    contents <- readFile "07.txt"
     -- part 1
     print $ sum $ zipWith (*) [1..] $ map snd $ sortOn fst $ parse contents
     -- part 2

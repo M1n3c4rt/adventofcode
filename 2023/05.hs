@@ -2,7 +2,7 @@ import Data.List.Split (splitOn, chunksOf)
 
 main :: IO ()
 main = do
-    contents <- readFile "5.txt"
+    contents <- readFile "05.txt"
     let (seeds,maps) = parseInput contents
     -- part 1
     print $ minimum $ map fst $ sliceRanges (getRanges1 seeds) maps

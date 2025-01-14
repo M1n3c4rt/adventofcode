@@ -4,7 +4,7 @@ import qualified Data.HashMap.Strict as HM
 
 main :: IO ()
 main = do
-    contents <- readFile "3.txt"
+    contents <- readFile "03.txt"
     -- part 1
     print $ sum $ map (\(x,y,z) -> z) $ filter (checkNeighbours (lines contents)) $ getNumbersWithCoords $ lines contents
     -- part 2

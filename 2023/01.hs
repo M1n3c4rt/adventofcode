@@ -3,7 +3,7 @@ import Data.List (isPrefixOf)
 
 main :: IO ()
 main = do
-    contents <- readFile "1.txt"
+    contents <- readFile "01.txt"
     -- part 1
     print $ sum $ map getNumberDigits $ lines contents
     -- part 2

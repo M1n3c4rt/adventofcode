@@ -2,7 +2,7 @@ import Data.List.Split (splitOn)
 
 main :: IO ()
 main = do
-    contents <- readFile "2.txt"
+    contents <- readFile "02.txt"
     -- part 1
     print $ sum $ getValidIDs $ map parse $ lines contents
     -- part 2

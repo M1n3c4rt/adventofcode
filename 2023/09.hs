@@ -1,7 +1,7 @@
 
 main :: IO ()
 main = do
-    contents <- readFile "9.txt"
+    contents <- readFile "09.txt"
     let lists = parse contents
     -- part 1
     print $ sum $ map (extrapolateWith sum last) lists

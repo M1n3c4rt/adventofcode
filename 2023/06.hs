@@ -1,6 +1,6 @@
 main :: IO ()
 main = do
-    contents <- readFile "6.txt"
+    contents <- readFile "06.txt"
     -- part 1
     print $ product $ map solveQuadratic $ parseInput contents
     -- part 2

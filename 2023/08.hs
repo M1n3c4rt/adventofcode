@@ -2,7 +2,7 @@ import qualified Data.HashMap.Strict as HM
 
 main :: IO ()
 main = do
-    contents <- readFile "8.txt"
+    contents <- readFile "08.txt"
     let (dirs, m) = parse contents
     -- part 1
     print $ length $ takeWhile (/= "ZZZ") $ takeStep m dirs "AAA"

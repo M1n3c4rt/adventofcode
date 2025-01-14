@@ -2,7 +2,7 @@ import Data.List.Split (splitOn)
 
 main :: IO ()
 main = do
-    contents <- readFile "4.txt"
+    contents <- readFile "04.txt"
     -- part 1
     print $ sum $ map (double . getWin . parseLine) $ lines contents
     -- part 2
