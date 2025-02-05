@@ -1,4 +1,4 @@
-import DijkstraSimple
+import DijkstraSimple ( findShortestDistance, fromDistance, graphFromList )
 import Data.List.Safe ((!!))
 import Prelude hiding ((!!))
 import Data.Maybe (fromMaybe)
