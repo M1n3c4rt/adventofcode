@@ -15,7 +15,6 @@ main = do
 
 type Monkeys = [(String,(String,String,Ratio Int -> Ratio Int -> Ratio Int))]
 type FinishedMonkeys = HM.HashMap String (Ratio Int)
-type FinishedMonkeys' = HM.HashMap String (Ratio Int -> Ratio Int)
 
 diffList :: Num a => [a] -> [a]
 diffList (x:y:ys) = (y-x):diffList (y:ys)
