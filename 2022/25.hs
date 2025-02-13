@@ -3,7 +3,7 @@ main :: IO ()
 main = do
     contents <- readFile "25.txt"
     -- part 1
-    print $ showSNAFU $ sum $ map readSNAFU $ lines contents
+    putStrLn $ showSNAFU $ sum $ map readSNAFU $ lines contents
     -- part 2
 
 readSNAFU :: String -> Int
