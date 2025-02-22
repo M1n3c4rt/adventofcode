@@ -1,4 +1,5 @@
 import qualified Data.HashMap.Strict as HM
+import Data.List (find)
 
 main :: IO ()
 main = do
@@ -14,7 +15,7 @@ enumerate :: [[a]] -> [(Int,Int,a)]
 enumerate l = let el = map (zip [0..]) l in map (\(a,b,c) -> (b,a,c)) $ concat $ zipWith (\x y -> map (\t -> (x, fst t, snd t)) y) [0..] el
 
 findS :: [(Int,Int,Char)] -> (Int,Int)
-findS el = (\(a,b,c) -> (a,b)) $ head $ filter (\(a,b,c) -> c == 'S') el
+findS el = (\(Just (a,b,c)) -> (a,b)) $ find (\(a,b,c) -> c == 'S') el
 
 extend :: [String] -> (Node,Int) -> [(Node, Int)]
 extend l ((x,y),n) = filter (\((a,b),c) -> l !! b !! a `elem` ".E") [((x,y+1),n+1),((x,y-1),n+1),((x+1,y),n+1),((x-1,y),n+1)]

@@ -1,6 +1,6 @@
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
-import Data.List (sort)
+import Data.List (sort, find)
 
 main :: IO ()
 main = do
@@ -10,8 +10,8 @@ main = do
     let r = rads p
     let is = map intercepts r
     -- part 1
-    let m = fst $ head $ filter (`insideRegion` r) $ map (,2000000) [-600000..]
-    let n = fst $ head $ filter (`insideRegion` r) $ map (,2000000) [5000000,4999999..]
+    let Just m = fmap fst $ find (`insideRegion` r) $ map (,2000000) [-600000..]
+    let Just n = fmap fst $ find (`insideRegion` r) $ map (,2000000) [5000000,4999999..]
     print $ n - m
     -- part 2
     let a = diff2s $ sort $ concatMap (\(a,b,c,d) -> [a,b]) is

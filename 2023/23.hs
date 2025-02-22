@@ -1,6 +1,6 @@
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (mapMaybe)
-import Data.Foldable (maximumBy)
+import Data.Foldable (maximumBy, find)
 import Data.Function (on)
 import Data.List (sortOn)
 import qualified Data.Bifunctor
@@ -59,8 +59,8 @@ getNeighbours cs ns (x,y) = mapMaybe (expand [(x,y)]) openNeighbourDirs
                 | c == '#' = Nothing
                 | (a,b) `elem` ns = Just ((a,b),1)
                 | otherwise =
-                    let next = expand ((a,b):prev) $ head $ filter (\(l,m,n,o) -> (l,m) `notElem` prev && getC (l,m) /= '#') [(a,b+1,0,1),(a+1,b,1,0),(a,b-1,0,-1),(a-1,b,-1,0)] in
-                    (\(m,n) -> (m,n+1)) <$> next
+                    let next = expand ((a,b):prev) <$> find (\(l,m,n,o) -> (l,m) `notElem` prev && getC (l,m) /= '#') [(a,b+1,0,1),(a+1,b,1,0),(a,b-1,0,-1),(a-1,b,-1,0)] in
+                    (\(Just (m,n)) -> (m,n+1)) <$> next
                 where c = getC (a,b)
 
 getNeighbours' :: [[Char]] -> [Node] -> Node -> [(Node,Int)]
@@ -72,8 +72,8 @@ getNeighbours' cs ns (x,y) = mapMaybe (expand [(x,y)]) openNeighbours
                 | c == '#' = Nothing
                 | node `elem` ns = Just (node,1)
                 | otherwise =
-                    let next = expand (node:prev) $ head $ filter (\n -> n `notElem` prev && getC n /= '#') [(a,b+1),(a+1,b),(a,b-1),(a-1,b)] in
-                    (\(m,n) -> (m,n+1)) <$> next
+                    let next = expand (node:prev) <$> find (\n -> n `notElem` prev && getC n /= '#') [(a,b+1),(a+1,b),(a,b-1),(a-1,b)] in
+                    (\(Just (m,n)) -> (m,n+1)) <$> next
                 where c = getC (a,b)
 
 isNode :: [[Char]] -> Node -> Bool

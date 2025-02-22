@@ -1,5 +1,6 @@
-import Data.List ( nub )
+import Data.List ( nub, find )
 import qualified Data.Bifunctor
+import Data.Maybe (fromJust)
 
 main :: IO ()
 main = do
@@ -7,7 +8,7 @@ main = do
     -- part 1
     print $ splitQuads 101 103 [[],[],[],[]] $ map (transfer 100 101 103 . readPart) $ lines contents
     -- part 2
-    print $ fst $ head $ filter (\x -> nub (snd x) == snd x) $ zip [1..] $ transferCumulative (101*103) 101 103 (map readPart $ lines contents)
+    print $ fst $ fromJust $ find (\x -> nub (snd x) == snd x) $ zip [1..] $ transferCumulative (101*103) 101 103 (map readPart $ lines contents)
 
 readPart :: String -> ((Int,Int),(Int,Int))
 readPart s = ((read $ takeWhile (/= ',') $ drop 2 s, read $ tail $ takeWhile (/= ' ') $ dropWhile (/= ',') s),(read $ takeWhile (/= ',') $ drop 2 $ dropWhile (/= 'v') s, read $ tail $ dropWhile (/= ',') $ tail $ dropWhile (/= ',') s))

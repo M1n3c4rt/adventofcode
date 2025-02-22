@@ -1,4 +1,4 @@
-import Data.List (sort, sortOn, nub)
+import Data.List (sort, sortOn, nub, find)
 
 main :: IO ()
 main = do
@@ -42,13 +42,13 @@ getHandType' :: Hand' -> HandType
 getHandType' (Hand' p q r s t) = maximum $ map (getHandType . (\[a,b,c,d,e] -> Hand e d c b a)) (getAllJokerHands [p,q,r,s,t])
 
 fromString :: String -> Hand
-fromString = (\[a,b,c,d,e] -> Hand a b c d e) . map (\c -> snd $ head $ filter ((==c) . fst) $ zip "23456789TJQKA" [Two .. Ace])
+fromString = (\(Just [a,b,c,d,e]) -> Hand a b c d e) . mapM (\c -> fmap snd $ find ((==c) . fst) $ zip "23456789TJQKA" [Two .. Ace])
 
 fromString' :: String -> Hand'
-fromString' = (\[a,b,c,d,e] -> Hand' a b c d e) . map fromChar'
+fromString' = (\(Just [a,b,c,d,e]) -> Hand' a b c d e) . mapM fromChar'
     where fromChar' c
-            | c == 'J' = Joker
-            | otherwise = snd $ head $ filter ((==c) . fst) $ zip "23456789TJQKA" $ map Only [Two .. Ace]
+            | c == 'J' = Just Joker
+            | otherwise = fmap snd $ find ((==c) . fst) $ zip "23456789TJQKA" $ map Only [Two .. Ace]
 
 instance Ord Hand where
     (<=) :: Hand -> Hand -> Bool
