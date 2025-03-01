@@ -10,7 +10,7 @@ main = do
     -- part 2
     print $ sum $ map (\x -> blinkMemo (75,x)) l
     -- keep going!
-    putStr $ intercalate "\n" $ zipWith (curry (\x -> show (fst x) ++ ": " ++ show (snd x))) [75..] (map (\x -> sum $ map (\y -> blinkMemo (x,y)) l) [75..])
+    mapM_ putStrLn $ zipWith (curry (\x -> show (fst x) ++ ": " ++ show (snd x))) [76..] (map (\x -> sum $ map (\y -> blinkMemo (x,y)) l) [76..])
     
 blink :: (Integer,Integer) -> Integer
 blink (0,k) = 1
@@ -24,10 +24,6 @@ blinkOne  l
     | l == 0 = [1]
     | even (length (show l)) = let (n,l') = (length (show l) `div` 2, show l) in [read (take n l'),read (drop n l')] :: [Integer]
     | otherwise = [2024*l]
-
-aplly :: (b -> b) -> Integer -> (b -> b)
-aplly f 0 = id
-aplly f n = aplly f (n-1) . f
 
 getNumbers :: String -> [Integer]
 getNumbers s = map read $ words s
