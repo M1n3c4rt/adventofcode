@@ -9,8 +9,6 @@ main = do
     contents <- readFile "20.txt"
     let (alg,image) = parse contents
     -- part 1
-    print $ bounds image
-    putStrLn $ pprint image
     print $ S.size $ iterateParity 2 (enhance alg) True image
     -- part 2
     print $ S.size $ iterateParity 50 (enhance alg) True image
