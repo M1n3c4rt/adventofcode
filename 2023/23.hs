@@ -15,7 +15,6 @@ main = do
     let nodemap = HM.fromList $ map (\n -> (n,getNeighbours grid nodes n)) nodes
     let nodemap' = HM.fromList $ map (\n -> (n,getNeighbours' grid nodes n)) nodes
     -- part 1
-    mapM_ print $ HM.toList nodemap'
     print $ (2+) $ pathLength nodemap $ reverse $ findLongestPath nodemap (m,m) [(1,1)]
     -- part 2
     print $ (2+) $ pathLength nodemap' $ reverse $ findLongestPath nodemap' (m,m) [(1,1)]
