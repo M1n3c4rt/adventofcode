@@ -3,10 +3,7 @@ import qualified Data.HashMap.Strict as HM
 import Data.Maybe (mapMaybe)
 import DijkstraSimple (findShortestDistance, fromDistance)
 import qualified Data.Bifunctor
-import Debug.Trace (trace)
 import Data.List (sortOn)
-import System.Random.Shuffle ( shuffle, shuffle' )
-import System.Random (getStdGen, random, StdGen, mkStdGen)
 
 main :: IO ()
 main = do
@@ -73,6 +70,3 @@ choose n [] = []
 
 choose' :: Eq b => Int -> [(String, b)] -> [([(String, b)], [(String, b)])]
 choose' n xs = map (\c -> (c,filter (\x -> x `notElem` c || fst x == "AA") xs)) $ choose n xs
-
-stream :: StdGen -> [Int]
-stream g = let (x,g') = random g in x:stream g'

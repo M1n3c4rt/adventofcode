@@ -1,4 +1,3 @@
-import Debug.Trace (trace)
 
 main :: IO ()
 main = do

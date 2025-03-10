@@ -1,4 +1,3 @@
-import Debug.Trace (trace)
 import Data.List (genericDrop)
 
 main :: IO ()
@@ -28,7 +27,7 @@ parsevs = reverse . map ((==26) . read . drop 6) . filter (\l -> take 5 l == "di
 
 validate :: [Integer] -> [Integer] -> [Integer] -> [Bool] -> Integer
 validate [] _ _ _ = 0
-validate (d:digits) (p:ps) (q:qs) (v:vs) = trace (show (base26 (prev*(25*n + 1) + n*(d+q)),n,d:digits,p,q,v)) $ prev*(25*n + 1) + n*(d+q)
+validate (d:digits) (p:ps) (q:qs) (v:vs) = prev*(25*n + 1) + n*(d+q)
     where
         prev = (if v then (`div`26) else id) $ validate digits ps qs vs
         n = fromIntegral $ fromEnum $ (prev `mod` 26) + p /= d

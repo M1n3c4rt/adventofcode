@@ -1,7 +1,6 @@
 import qualified Data.Set as S
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromMaybe)
-import Debug.Trace (trace)
 
 main :: IO ()
 main = do
@@ -41,5 +40,3 @@ ground s =
         d = maximum snds
         range = S.fromList [(x,y) | x <- [a..c], y <- [b..d]]
     in S.size $ S.difference range s
-
-trace' x = trace (show x) x

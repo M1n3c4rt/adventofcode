@@ -1,6 +1,5 @@
 import Data.List.Split (splitOn)
 import Data.Char (isDigit, isAlphaNum)
-import Debug.Trace (trace)
 import Data.List (elemIndices)
 import qualified Data.HashMap.Strict as HM
 

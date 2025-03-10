@@ -2,7 +2,6 @@ import Data.List.Split (splitOn)
 import Data.Ratio (Ratio, (%), numerator)
 import Data.Maybe (mapMaybe)
 import Data.Matrix ( fromList, inverse, toList, toLists )
-import Debug.Trace ( trace )
 
 main :: IO ()
 main = do

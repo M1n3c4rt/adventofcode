@@ -1,5 +1,4 @@
 import Data.Maybe (fromJust)
-import Debug.Trace (trace)
 import qualified Data.Bifunctor
 
 main :: IO ()

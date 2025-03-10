@@ -2,7 +2,6 @@ import qualified Data.HashMap.Strict as HM
 import Data.List.Split (splitOn)
 import Data.List (nub)
 import Data.Char (isUpper)
-import Debug.Trace (trace)
 
 main :: IO ()
 main = do

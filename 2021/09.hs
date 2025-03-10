@@ -1,6 +1,5 @@
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Set as S
-import Debug.Trace (trace)
 import Data.List (sortBy)
 import Data.Ord (comparing, Down (Down))
 

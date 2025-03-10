@@ -1,5 +1,4 @@
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (trace)
 import Data.Char (chr)
 
 main :: IO ()

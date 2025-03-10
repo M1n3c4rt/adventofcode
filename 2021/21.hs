@@ -1,4 +1,3 @@
-import Debug.Trace (trace)
 import Data.Complex
 import Data.MemoUgly (memo)
 

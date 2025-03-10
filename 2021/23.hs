@@ -1,7 +1,6 @@
 import Data.List (elemIndex, sort, delete, minimumBy)
 import Data.Maybe (fromJust, mapMaybe)
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (trace)
 import Data.MemoUgly (memo)
 import Data.Function (on)
 import qualified Data.Bifunctor

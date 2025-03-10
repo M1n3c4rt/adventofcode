@@ -1,7 +1,6 @@
 import Data.List (transpose)
 import qualified Data.Set as S
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (trace)
 
 main :: IO ()
 main = do
@@ -39,11 +38,11 @@ getGraphs height width (b:next:blocks) =
 floodFill :: Int -> S.Set (Int,Int) -> (Int,Int) -> [HM.HashMap (Int,Int) (S.Set (Int,Int))] -> Int
 floodFill t srcs dest (g:gs)
 --    | dest `S.member` srcs = t
-    | dest `S.member` srcs = trace (show (t+1) ++ "\n" ++ pprint srcs 25 120) t
+    | dest `S.member` srcs = t
     | otherwise =
         let nexts = S.unions $ S.map (\src -> HM.lookupDefault S.empty src g) srcs
 --        in floodFill (t+1) nexts dest gs
-        in trace (show (t+1) ++ "\n" ++ pprint srcs 25 120) $ floodFill (t+1) nexts dest gs
+        in floodFill (t+1) nexts dest gs
 
 floodFill' :: Int -> S.Set (Int,Int) -> [(Int,Int)] -> [HM.HashMap (Int,Int) (S.Set (Int,Int))] -> Int
 floodFill' t srcs [] _ = t

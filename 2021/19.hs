@@ -2,7 +2,6 @@ import Data.List (transpose, intersect, intersectBy, intercalate)
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust, isJust)
-import Debug.Trace (trace)
 import Data.Function (on)
 import qualified Data.Set as S
 

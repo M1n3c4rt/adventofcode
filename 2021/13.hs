@@ -1,6 +1,5 @@
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
-import Debug.Trace (trace)
 
 main :: IO ()
 main = do

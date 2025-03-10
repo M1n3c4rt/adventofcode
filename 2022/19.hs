@@ -1,5 +1,4 @@
 import Data.Char (isDigit)
-import Debug.Trace (trace)
 import Data.List (nub, sortOn)
 
 main :: IO ()
