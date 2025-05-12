@@ -1,5 +1,8 @@
 *.txt
 DijkstraSimple.hs
-streamline.py
+*.py
 sessioncookie.txt
 test.hs
+*.cabal
+.ghc.environment.x86_64-linux-9.6.7
+dist-newstyle
