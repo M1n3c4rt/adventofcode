@@ -59,4 +59,5 @@ cull (x:y:xs)
     | x /= y = cull (y:xs)
     | otherwise = fromJust x
 
+splitCtc :: HM.HashMap (Int, Int) (Int, Int) -> HM.HashMap (Int, Int) (Int, Int)
 splitCtc = HM.filterWithKey (\(x,y) (a,b) -> (abs (a-56) + abs (b-54)) > (abs (x-56) + abs (y-54)))

@@ -51,6 +51,7 @@ resolveRemainders table remaining
                 let Just (m,rs) = HM.lookup k table in HM.unionWith (+) (unfold table (m,k)) a
     in resolveRemainders table $ foldr1 (HM.unionWith (+)) $ map (\(ss,n) -> unfold table (n,ss)) $ HM.toList next
 
+binarySearch :: (Integral b, Ord a) => (b -> a) -> a -> (b, b) -> b
 binarySearch f lim (rmin,rmax)
     | rmax - rmin == 1 = rmin
     | f ((rmin+rmax) `div` 2) < lim = binarySearch f lim ((rmin+rmax) `div` 2,rmax)
