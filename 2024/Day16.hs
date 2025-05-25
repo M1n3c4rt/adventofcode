@@ -1,16 +1,18 @@
 module Day16 where
 
 import Data.List ( nub )
-import DijkstraSimple ( findShortestDistance,findShortestPaths,fromDistance,graphFromList )
+import qualified Data.HashMap.Strict as HM
+import Utility.AOC (shortestDistance, shortestPaths)
+import Data.Maybe (fromJust)
 
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2024/16.txt"
-    let g = graphFromList $ getGraph $ lines contents
+    let g = HM.fromList $ getGraph $ lines contents
     -- part 1
-    print $ fromDistance (findShortestDistance g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1))
+    print $ fromJust (shortestDistance g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1))
     -- part 2
-    print $ length $ nub $ concatMap (padL . fst) $ findShortestPaths g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1)
+    print $ length $ nub $ concatMap (padL . (++[(1,139,1,0)])) $ snd $ shortestPaths g (1,length (lines contents) - 2,1,0) (length (lines contents) - 2,1,0,-1)
 
 type Node = (Int,Int,Int,Int)
 type Path = (Int,[Node])

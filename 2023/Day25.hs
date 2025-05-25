@@ -1,7 +1,7 @@
 module Day25 where
 
 import Data.List.Split (splitOn)
-import DijkstraSimple ( findShortestDistance, Distance(Infinity), Graph, findShortestPaths )
+import Utility.AOC ( shortestDistance )
 import Data.Function (on)
 import Data.List (maximumBy, sortOn, delete, nub)
 import qualified Data.HashMap.Strict as HM
@@ -22,10 +22,12 @@ main = do
     -- part 2
     -- gg!
 
-getGraph :: String -> Graph String
+type Graph = HM.HashMap [Char] [([Char], Integer)]
+
+getGraph :: String -> Graph
 getGraph = graphFromEdges . concatMap ((\[a,bs] -> map (a,) $ splitOn " " bs) . splitOn ": ") . lines
 
-graphFromEdges :: [(String,String)] -> Graph String
+graphFromEdges :: [([Char], [Char])] -> Graph
 graphFromEdges = foldl (\acc (a,b) -> HM.insertWith (++) a [(b,1)] $ HM.insertWith (++) b [(a,1)] acc) HM.empty
 
 getNodes :: String -> [String]
@@ -35,19 +37,19 @@ choose2 :: [a] -> [(a,a)]
 choose2 (x:xs) = map (x,) xs ++ choose2 xs
 choose2 [] = []
 
-pairUp :: [[([String], Distance Int)]] -> [(String,String)]
+pairUp :: [[([String], Maybe Int)]] -> [(String,String)]
 pairUp = concat . concatMap (map (map (\(a,b) -> (min a b, max a b)) . (\x -> zip x $ tail x) . fst))
 
 accumulate :: [(String,String)] -> HM.HashMap (String,String) Int
 accumulate = foldr (\c acc -> HM.insertWith (+) c 1 acc) HM.empty
 
-mode :: [[([String], Distance Int)]] -> [((String, String), Int)]
+mode :: [[([String], Maybe Int)]] -> [((String, String), Int)]
 mode = sortOn (negate . snd) . HM.toList . accumulate . pairUp
 
-isDisconnected :: [String] -> Graph String -> Bool
-isDisconnected nodes graph = elem Infinity $ map (uncurry $ findShortestDistance graph) $ choose2 nodes
+isDisconnected :: [String] -> Graph -> Bool
+isDisconnected nodes graph = elem Nothing $ map (uncurry $ shortestDistance graph) $ choose2 nodes
 
-getGraphMultSize :: [String] -> Graph String -> Int
+getGraphMultSize :: [String] -> Graph -> Int
 getGraphMultSize nodes graph =
-    let oneHalf = length $ filter (/= Infinity) $ map (findShortestDistance graph (head nodes)) nodes
+    let oneHalf = length $ filter (/= Nothing) $ map (shortestDistance graph (head nodes)) nodes
     in (length nodes - oneHalf)*oneHalf

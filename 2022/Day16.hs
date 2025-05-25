@@ -2,10 +2,10 @@ module Day16 where
 
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (mapMaybe)
-import DijkstraSimple (findShortestDistance, fromDistance)
+import Data.Maybe (mapMaybe, fromJust)
 import qualified Data.Bifunctor
 import Data.List (sortOn)
+import Utility.AOC (shortestDistance)
 
 main :: IO ()
 main = do
@@ -55,7 +55,7 @@ flattenGraph :: [(String, Int)] -> Valves -> Valves
 flattenGraph important valves =
     let valves' = HM.map snd valves
         importants = genLists important
-        getNode ((n,k),ns) = (n,(k,) $ map (\m -> (m, fromDistance $ findShortestDistance valves' n m)) ns)
+        getNode ((n,k),ns) = (n,(k,) $ map (\m -> (m, fromJust $ shortestDistance valves' n m)) ns)
     in HM.fromList $ map getNode importants
 
 genLists :: [(String, Int)] -> [((String, Int),[String])]

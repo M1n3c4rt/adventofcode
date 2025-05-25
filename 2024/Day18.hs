@@ -1,8 +1,10 @@
 module Day18 where
 
-import DijkstraSimple ( findShortestDistance, fromDistance, graphFromList )
 import Data.List.Split (splitOn)
 import qualified Data.Bifunctor
+import qualified Data.HashMap.Strict as HM
+import Utility.AOC (shortestDistance)
+import Data.Maybe (fromJust, isNothing)
 
 main :: IO ()
 main = do
@@ -10,7 +12,7 @@ main = do
     let b = getBlocks contents
     let g = getGraph (take 1024 $ getBlocks contents) (genGrid 70 70)
     -- part 1
-    print $ fromDistance $ findShortestDistance (graphFromList g) (0,0) (70,70)
+    print $ fromJust $ shortestDistance (HM.fromList g) (0,0) (70,70)
     -- part 2
     print $ firstblock (drop 1024 b) g
 
@@ -21,7 +23,7 @@ getBlocks s = map (\x -> let [a,b] = splitOn "," x in (read a, read b)) $ lines 
 
 firstblock :: [Node] -> [(Node, [(Node, Int)])] -> Node
 firstblock (r:remblocks) graph
-    | (==(-1)) $ fromDistance $ findShortestDistance (graphFromList newgraph) (0,0) (70,70) = r
+    | isNothing $ shortestDistance (HM.fromList newgraph) (0,0) (70,70) = r
     | otherwise = firstblock remblocks newgraph
     where newgraph = updateGraph r graph
 

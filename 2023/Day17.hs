@@ -1,21 +1,21 @@
 module Day17 where
 
-import DijkstraSimple ( findShortestDistance, fromDistance, graphFromList )
 import Data.List.Safe ((!!))
 import Prelude hiding ((!!))
-import Data.Maybe (fromMaybe)
+import Data.Maybe (fromJust, fromMaybe)
 import qualified Data.Bifunctor
 import qualified Data.HashMap.Strict as HM
+import Utility.AOC (shortestDistance)
 
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2023/17.txt"
-    let graph = graphFromList $ getAllNodes getNodes $ lines contents
-    let graph' = graphFromList $ getAllNodes getNodes' $ lines contents
+    let graph = HM.fromList $ getAllNodes getNodes $ lines contents
+    let graph' = HM.fromList $ getAllNodes getNodes' $ lines contents
     -- part 1
-    print $ fromDistance $ findShortestDistance graph (0,0,0,1) (g,g,0,1)
+    print $ fromJust $ shortestDistance graph (0,0,0,1) (g,g,0,1)
     -- part 2
-    print $ fromDistance $ findShortestDistance graph' (0,0,0,1) (g,g,0,1)
+    print $ fromJust $ shortestDistance graph' (0,0,0,1) (g,g,0,1)
 
 type Node = (Int,Int,Int,Int)
 
