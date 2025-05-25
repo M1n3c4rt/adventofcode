@@ -1,7 +1,6 @@
 module Day22 where
 
 import Data.List.Split (splitOn)
-import Debug.Trace (traceShow)
 import qualified Data.Set as S
 
 main :: IO ()

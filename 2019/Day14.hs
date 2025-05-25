@@ -5,7 +5,6 @@ import qualified Data.HashMap.Internal.Strict as HM
 import Data.Maybe (fromJust)
 import Data.List (permutations, minimumBy)
 import Data.Function (on)
-import Debug.Trace (traceShowId)
 
 main :: IO ()
 main = do

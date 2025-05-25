@@ -2,7 +2,6 @@ module Day19 where
 import qualified Data.HashMap.Strict as HM
 import Data.List.Split (splitOn)
 import Data.Maybe (fromJust)
-import Debug.Trace (traceShowId, traceShow, trace)
 
 main :: IO ()
 main = do
@@ -55,7 +54,7 @@ pprint n g = unlines [[if fromJust (HM.lookup (x,y) g) then '#' else '.' | x <- 
 
 findSquare :: (Int, Int) -> (Int, Int) -> HM.HashMap Int Int -> Int
 findSquare (a,b) (c,d) state
-    | c - a == 99 && b - d == 99 = traceShow ((a,b),(c,d)) $ 10000 * a + d
+    | c - a == 99 && b - d == 99 = 10000 * a + d
     | otherwise =
         let (a',b') = (a,b+1)
             (c',d') = (c+1,d)
@@ -69,10 +68,10 @@ findSquare (a,b) (c,d) state
             (newc,newd) = case run [c',d'] 0 0 state of
                 [1] -> fst $ last $ takeWhile ((==[1]) . snd) $ northEast (c',d')
                 [0] -> fst $ head $ dropWhile ((==[0]) . snd) $ southWest (c',d')
-        in traceShow ((a,b),(c,d)) $ findSquare (newa,newb) (newc,newd) state
+        in findSquare (newa,newb) (newc,newd) state
 
 initFindSquare :: HM.HashMap Int Int -> Int
 initFindSquare state =
-    let (a,b) = traceShowId $ head $ dropWhile (\(x,y) -> run [x,y] 0 0 state == [0]) $ iterate (\(x,y) -> (x-1,y+1)) (75,0)
-        (c,d) = traceShowId $ head $ dropWhile (\(x,y) -> run [x,y] 0 0 state == [0]) $ iterate (\(x,y) -> (x+1,y-1)) (0,75)
+    let (a,b) = head $ dropWhile (\(x,y) -> run [x,y] 0 0 state == [0]) $ iterate (\(x,y) -> (x-1,y+1)) (75,0)
+        (c,d) = head $ dropWhile (\(x,y) -> run [x,y] 0 0 state == [0]) $ iterate (\(x,y) -> (x+1,y-1)) (0,75)
     in findSquare (a,b) (c,d) state

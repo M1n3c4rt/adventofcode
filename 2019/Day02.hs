@@ -3,7 +3,6 @@ module Day02 where
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
 import Control.Monad ((>=>))
-import Debug.Trace ( traceShow)
 import Data.Maybe (fromJust)
 
 main :: IO ()

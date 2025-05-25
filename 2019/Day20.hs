@@ -3,7 +3,6 @@ import Utility.AOC (enumerate, neighbours4, shortestDistance)
 import qualified Data.HashMap.Strict as HM
 import Data.Char (isUpper)
 import Data.Maybe (fromJust, mapMaybe, maybeToList, isNothing)
-import Debug.Trace (traceShowId)
 
 
 main :: IO ()

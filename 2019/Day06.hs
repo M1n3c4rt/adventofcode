@@ -1,7 +1,6 @@
 module Day06 where
 
 import Data.List.Split (splitOn)
-import Debug.Trace (traceShow)
 import Data.Either (rights)
 import Data.Maybe (listToMaybe, mapMaybe)
 

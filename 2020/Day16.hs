@@ -4,7 +4,6 @@ import Data.List.Split ( splitOn )
 import Data.Function (on)
 import Data.List (groupBy, transpose, sortOn)
 import Data.Char (isDigit)
-import Debug.Trace (traceShowId, traceShow)
 
 main :: IO ()
 main = do

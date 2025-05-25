@@ -1,6 +1,5 @@
 module Day18 where
 
-import Debug.Trace (traceShowId)
 import Data.List.Split (splitOn)
 
 main :: IO ()

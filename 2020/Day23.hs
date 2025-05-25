@@ -1,7 +1,6 @@
 module Day23 where
 
 import Utility.AOC (extrapolate)
-import Debug.Trace (trace, traceShowId)
 import Data.Char (isDigit)
 import Data.Maybe (fromJust)
 import qualified Data.HashMap.Strict as HM

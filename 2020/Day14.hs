@@ -4,7 +4,6 @@ import qualified Data.HashMap.Strict as HM
 import Data.List (groupBy)
 import Data.Char (isDigit)
 import Data.Function (on)
-import Debug.Trace (traceShowId, traceShow)
 
 main :: IO ()
 main = do

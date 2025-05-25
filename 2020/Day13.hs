@@ -6,7 +6,6 @@ import Data.Maybe (mapMaybe)
 import Data.Function (on)
 import Data.Foldable (minimumBy)
 import Data.List (sortOn)
-import Debug.Trace (traceShow)
 import Data.Ord (Down(Down))
 
 main :: IO ()
@@ -25,5 +24,5 @@ nextMultiple x k = x + (k - (x `mod` k))
 
 crt :: (Integral d, Show d) => d -> d -> [(d, d)] -> d
 crt s step ((n,k):ns)
-    | s `mod` n == k = if null ns then s else traceShow (s,step,n,k) $ crt s (step*n) ns
-    | otherwise = traceShow (s,step,n,k) $ crt (s+step) step ((n,k):ns)
+    | s `mod` n == k = if null ns then s else crt s (step*n) ns
+    | otherwise = crt (s+step) step ((n,k):ns)

@@ -7,7 +7,6 @@ import Data.List (transpose, intercalate)
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (catMaybes, mapMaybe, fromJust, fromMaybe)
 import Utility.AOC (neighbours4, enumerateFilter)
-import Debug.Trace (trace, traceShowId, traceShow)
 import qualified Data.Set as S
 
 main :: IO ()

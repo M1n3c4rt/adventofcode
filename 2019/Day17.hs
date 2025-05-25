@@ -6,7 +6,6 @@ import Data.Char (chr, ord)
 import Utility.AOC (enumerateFilter, neighbours4)
 import qualified Data.Set as S
 import Data.List (intersperse)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

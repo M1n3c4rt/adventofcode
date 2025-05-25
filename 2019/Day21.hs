@@ -1,22 +1,16 @@
-module Day13 where
+module Day21 where
 
 import qualified Data.HashMap.Strict as HM
 import Data.List.Split (splitOn)
+import Data.Char (ord, chr)
 
 main :: IO ()
 main = do
-    contents <- readFile "/home/miney/code/haskell/adventofcode/2019/13.txt"
-    let out = run [] 0 0 $ parse contents
-    let outP = run (repeat 0) 0 0 $ HM.insert 0 2 $ cheat $ parse contents
+    contents <- readFile "/home/miney/code/haskell/adventofcode/2019/21.txt"
     -- part 1
-    print $ length $ filter (==2) $ takeEvery 3 out
+    print $ head $ (filter (>256) . (\x -> run x 0 0 $ parse contents) . map ord . unlines) part1
     -- part 2
-    putStr $ pprints HM.empty $ splitOn [99] outP
-
-takeEvery :: Int -> [a] -> [a]
-takeEvery n ns = case drop (n-1) ns of
-    b:bs -> b:takeEvery n bs
-    [] -> []
+    print $ head $ (filter (>256) . (\x -> run x 0 0 $ parse contents) . map ord . unlines) part2
 
 parse :: String -> HM.HashMap Int Int
 parse = HM.fromList . zip [0..] . map read . splitOn ","
@@ -25,7 +19,7 @@ run :: [Int] -> Int -> Int -> HM.HashMap Int Int -> [Int]
 run inputs pointer relBase state = case inst of
     1 -> run inputs (pointer+4) relBase $ HM.insert cW (a+b) state
     2 -> run inputs (pointer+4) relBase $ HM.insert cW (a*b) state
-    3 -> (99:) $ run (tail inputs) (pointer+2) relBase $ HM.insert aW (head inputs) state
+    3 -> run (tail inputs) (pointer+2) relBase $ HM.insert aW (head inputs) state
     4 -> a : run inputs (pointer+2) relBase state
     5 -> run inputs (if a == 0 then pointer+3 else b) relBase state
     6 -> run inputs (if a /= 0 then pointer+3 else b) relBase state
@@ -52,18 +46,11 @@ run inputs pointer relBase state = case inst of
 splitMode :: (Integral a, Read a, Show a) => a -> [a]
 splitMode n = n `mod` 100 : map (read . pure) (reverse $ show $ n `div` 100) ++ repeat 0
 
-pprint :: HM.HashMap (Int,Int) Int -> [Int] -> (HM.HashMap (Int,Int) Int,String)
-pprint prev out =
-    let coords = helper out
-        helper (x:y:z:zs) = HM.insert (x,y) z $ helper zs
-        helper [] = prev
-        charMap = HM.fromList [(0,' '),(1,'|'),(2,'#'),(3,'-'),(4,'O')]
-        [(minx,miny),(maxx,maxy)] = map ($ HM.keys coords) [minimum,maximum]
-    in (coords,"Score: " ++ show (HM.lookupDefault 0 (-1,0) coords) ++ "\n" ++ unlines [[HM.lookupDefault ' ' (HM.lookupDefault 0 (x,y) coords) charMap | x <- [0..maxx]] |y <- [miny..maxy]])
+-- ???# : jump
+-- ???. : don't jump
+--
 
-pprints :: HM.HashMap (Int, Int) Int -> [[Int]] -> String
-pprints prev (o:outs) = let (cs,ss) = pprint prev o in (++pprints cs outs) $! ("\n\n" ++ ss)
-pprints prev [] = ""
-
-cheat :: HM.HashMap Int Int -> HM.HashMap Int Int
-cheat code = foldr (`HM.insert` 3) code [1585..1627]
+part1 :: [String]
+part1 = ["OR A J","AND B J","AND C J","NOT J J","AND D J","WALK"]
+part2 :: [String]
+part2 = ["OR A J","AND B J","AND C J","NOT J J","AND D J","OR E T","OR H T","AND T J","RUN"]
