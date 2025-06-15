@@ -14,7 +14,7 @@ import Data.Bifunctor (bimap)
 
 main :: IO ()
 main = do
-    contents <- readFile "/home/miney/code/haskell/adventofcode/2018/message.txt"
+    contents <- readFile "/home/miney/code/haskell/adventofcode/2018/23.txt"
     let bots = map parse $ lines contents
         l = length bots
         (strongP,strongR) =  maximumBy (compare `on` snd) bots
