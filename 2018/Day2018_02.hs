@@ -1,6 +1,5 @@
 module Day2018_02 where
 import Data.List (group, sort)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

@@ -3,7 +3,6 @@ import Data.List.Split (splitOn)
 import Data.List (sortOn, maximumBy, find)
 import Data.Ord (Down(Down))
 import Data.Function (on)
-import Debug.Trace (traceShow, trace, traceShowId)
 
 main :: IO ()
 main = do
@@ -25,9 +24,9 @@ parseLine line = helper $ filter (`notElem` words "units each with hit points to
         helper (w1:w2:ws) = let (w3:w4:w5:ws') = reverse ws; (a,b) = parseTraits $ reverse ws' in Group {uts=read w1,hp=read w2,dmg=read w5,dtype=w4,itv=read w3,team=True,weak=map (filter (/=',')) a,immune=map (filter (/=',')) b}
         parseTraits [] = ([],[])
         parseTraits ws@(w:rest)
-            | any (';' `elem`) ws = traceShow ws $ let (as,b:bs) = break (';' `elem`) rest in
+            | any (';' `elem`) ws = let (as,b:bs) = break (';' `elem`) rest in
                 (if w == "(weak" then id else flip) (,) (as++[init b]) (map (filter (/=')')) $ tail bs)
-            | otherwise = traceShow ws $ case w of
+            | otherwise = case w of
                 "(weak" -> (map (filter (/=')')) rest,[])
                 "(immune" -> ([],map (filter (/=')')) rest)
 
@@ -44,8 +43,8 @@ select groups [] = []
 
 step :: Int -> [Group] -> [Group]
 step n groups = if all team groups || not (any team groups) then
-    traceShowId groups else
-        traceShow (all odd [1,3..10^3],groups) $ step n $ fight groups n $ traceShowId attacks
+    groups else
+        step n $ fight groups n attacks
     where
         attacks = select groups $ sortOn (Down . (\g -> (uts g*dmg g,itv g))) groups
 

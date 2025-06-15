@@ -2,7 +2,6 @@ module Day2018_17 where
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
 import Data.List (nub)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

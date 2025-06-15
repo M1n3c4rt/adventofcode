@@ -1,6 +1,5 @@
 module Day2018_12 where
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (traceShow, traceShowId)
 import qualified Data.Set as S
 import Utility.AOC (extrapolate)
 

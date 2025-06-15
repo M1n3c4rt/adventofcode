@@ -1,7 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 module Day2018_09 where
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (traceShowId, traceShow)
 
 main :: IO ()
 main = do

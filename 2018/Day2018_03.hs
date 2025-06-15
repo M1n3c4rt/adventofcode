@@ -5,7 +5,6 @@ import Data.Function (on)
 import Utility.AOC (rangeIntersect)
 import Data.Maybe (isJust, isNothing, fromJust, mapMaybe)
 import Data.List.Safe (find)
-import Debug.Trace (traceShowId)
 
 main :: IO ()
 main = do

@@ -6,7 +6,6 @@ import Data.Foldable (minimumBy)
 import Data.Function (on)
 import Data.Maybe (mapMaybe, fromMaybe, fromJust)
 import Data.List (sort, sortOn, transpose)
-import Debug.Trace (traceShow, traceShowId)
 
 main :: IO ()
 main = do

@@ -2,10 +2,9 @@
 module Day2018_13 where
 import Utility.AOC (enumerateHM)
 import qualified Data.HashMap.Strict as HM
-import Data.Complex
+import Data.Complex ( Complex(..) )
 import Data.Function (on)
 import Data.List (groupBy, sortOn, nubBy)
-import Debug.Trace (traceShowId, traceShow)
 
 main :: IO ()
 main = do

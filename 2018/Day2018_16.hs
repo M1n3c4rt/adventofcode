@@ -3,7 +3,6 @@ import Data.Bits ((.&.), Bits ((.|.)))
 import Data.Maybe (isNothing, mapMaybe, fromJust)
 import Data.List.Split (splitOn)
 import Data.Bifunctor (second)
-import Debug.Trace (traceShowId)
 
 main :: IO ()
 main = do

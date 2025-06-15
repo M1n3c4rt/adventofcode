@@ -1,7 +1,6 @@
 module Day2018_07 where
 import Data.List (sort)
 import Data.Char (ord)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

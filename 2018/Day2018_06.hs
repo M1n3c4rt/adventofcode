@@ -3,7 +3,6 @@ import qualified Data.Set as S
 import Data.Function (on)
 import Utility.AOC (taxicab2, floodFillWith, neighbours4)
 import Data.Foldable (minimumBy, maximumBy)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

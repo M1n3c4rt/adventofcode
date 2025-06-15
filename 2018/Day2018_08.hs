@@ -26,4 +26,4 @@ sumMetadata (Tree (ts,m)) = sum m + sum (map sumMetadata ts)
 sumValues :: Tree -> Int
 sumValues (Tree (ts,m))
     | null ts = sum m
-    | otherwise = sum $ map sumValues $ mapMaybe ((ts!!) . (subtract 1)) m
+    | otherwise = sum $ map sumValues $ mapMaybe ((ts!!) . subtract 1) m
