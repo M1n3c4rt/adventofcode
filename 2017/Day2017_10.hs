@@ -13,7 +13,7 @@ main = do
     -- part 1
     print $ product $ map fst $ take 2 $ dropWhile ((/=0) . snd) $ knotHash' contents
     -- part 2
-    print $ knotHash contents
+    putStrLn $ knotHash contents
 
 knot ls (n,skip) = take (length ls) $ drop (n+skip) $ cycle $ uncurry zip (first reverse $ unzip a) ++ b
     where
