@@ -5,7 +5,6 @@ import Data.Char (ord)
 import Utility.AOC (chunk)
 import Data.Bits (Bits(xor))
 import Numeric (showHex)
-import Debug.Trace (traceShowId)
 
 main :: IO ()
 main = do

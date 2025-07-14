@@ -1,6 +1,5 @@
 module Day2017_07 where
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (traceShowId, traceShow)
 import Data.List (sortOn, groupBy)
 import Data.Function (on)
 import Data.Maybe (fromJust)
@@ -25,7 +24,7 @@ findBottom ps = filter (`notElem` concatMap (snd . snd) ps) (map fst ps)
 weight ps s = let Just (n,ps') = HM.lookup s ps in n + sum (map (weight ps) ps')
 
 discrepancy :: HM.HashMap String (Int,[String]) -> String -> Maybe Int
-discrepancy ps s = if null ps' then Nothing else case unique (traceShow (s,ps') $ traceShowId $ map (\p -> (p,weight ps p)) ps') of
+discrepancy ps s = if null ps' then Nothing else case unique (map (\p -> (p,weight ps p)) ps') of
         Nothing -> Nothing
         Just ((s',n'),k) -> case discrepancy ps s' of
             Nothing -> Just ((k-n'+) $ fst $ fromJust $ HM.lookup s' ps)

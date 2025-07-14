@@ -1,7 +1,6 @@
 module Day2017_18 where
 import Text.Read (readMaybe)
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

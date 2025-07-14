@@ -1,8 +1,6 @@
 module Day2017_23 where
 import qualified Data.HashMap.Strict as HM
 import Text.Read (readMaybe)
-import Debug.Trace (traceShow)
-import Utility.AOC (traceSleepSeconds, traceSleep)
 import Data.Numbers.Primes (isPrime)
 
 main :: IO ()
@@ -26,7 +24,7 @@ parse l = case words l of
             Nothing -> Reg (head s)
 
 runInsts :: Int -> HM.HashMap Char Int -> HM.HashMap Int (String,Value,Value) -> Int
-runInsts pointer regs insts = traceShow (pointer,regs) . traceSleep (if pointer == 20 then 5000000 else 50000) $ case HM.lookup pointer insts of
+runInsts pointer regs insts = case HM.lookup pointer insts of
     Nothing -> 0
     Just inst -> case inst of
         ("set",a@(Reg r),b) -> runInsts (pointer+1) (HM.insert r (f b) regs) insts

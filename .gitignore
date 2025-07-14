@@ -7,3 +7,4 @@ test.hs
 .ghc.environment.x86_64-linux-9.6.7
 dist-newstyle
 main
+*.zip

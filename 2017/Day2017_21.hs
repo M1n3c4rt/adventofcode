@@ -4,7 +4,6 @@ import Data.List.Extra (splitOn)
 import Utility.AOC (chunk)
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

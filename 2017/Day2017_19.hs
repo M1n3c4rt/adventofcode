@@ -4,7 +4,6 @@ import qualified Data.HashMap.Strict as HM
 import Data.Foldable (minimumBy)
 import Data.Function (on)
 import Data.Maybe (mapMaybe)
-import Debug.Trace (traceShowId, traceShow)
 import Data.Char (isAlpha)
 
 main :: IO ()

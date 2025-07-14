@@ -3,7 +3,6 @@ import qualified Data.HashMap.Strict as HM
 import Utility.AOC (floodFill)
 import Data.Maybe (fromJust)
 import qualified Data.Set as S
-import Debug.Trace (traceShowId)
 
 main :: IO ()
 main = do
