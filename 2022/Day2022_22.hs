@@ -38,7 +38,7 @@ next n grid (x,y) (d1,d2)
         '#' -> ((d1,d2),(x,y))
         '.' -> next (n-1) grid (x',y') (d1,d2)
     where
-        inBounds (x,y) = min x y >= 0 && y < length grid && x < length (grid !! y) && grid !! y !! x /= ' '
+        inBounds (a,b) = min a b >= 0 && b < length grid && a < length (grid !! b) && grid !! b !! a /= ' '
         (x',y') = last $ takeWhile inBounds $ iterate (\(a,b) -> (a-d1,b-d2)) (x,y)
 
 next' :: Int -> [String] -> (Int,Int) -> (Int,Int) -> ((Int,Int),(Int,Int))
@@ -51,7 +51,7 @@ next' n grid (x,y) (d1,d2)
         '#' -> ((d1,d2),(x,y))
         '.' -> next' (n-1) grid (x',y') (d1',d2')
     where
-        inBounds (x,y) = min x y >= 0 && y < length grid && x < length (grid !! y) && grid !! y !! x /= ' '
+        inBounds (a,b) = min a b >= 0 && b < length grid && a < length (grid !! b) && grid !! b !! a /= ' '
         Just ((x',y'),(d1',d2')) = HM.lookup ((x,y),(d1,d2)) cubeMap
 
 cubeMap :: HM.HashMap ((Int, Int), (Int, Int)) ((Int, Int), (Int, Int))
@@ -77,5 +77,5 @@ move part2 grid dirs = 1000*(yl+1) + 4*(xl+1) + lastDir
             (-1,0) -> 2
             (0,-1) -> 3
         ((d1,d2),(xl,yl)) = foldl (\(d',c) (d,n) -> (if part2 then next' else next) n grid c (turn d d')) (startFacing,start) dirs
-        turn L (d1,d2) = (d2,-d1)
-        turn R (d1,d2) = (-d2,d1)
+        turn L (d1',d2') = (d2',-d1')
+        turn R (d1',d2') = (-d2',d1')

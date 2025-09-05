@@ -1,6 +1,6 @@
 module Day2017_03 where
 import Data.Maybe (mapMaybe)
-import Utility.AOC (neighbours4, neighbours8)
+import Utility.AOC (neighbours8)
 import qualified Data.HashMap.Lazy as HM
 
 main :: IO ()

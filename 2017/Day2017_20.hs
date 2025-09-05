@@ -3,7 +3,6 @@ import Utility.AOC (numbers, taxicab)
 import Data.Bifunctor (second)
 import Data.Foldable (minimumBy)
 import Data.Function (on)
-import Data.List (group, sort)
 import Data.List.Extra (groupSortOn)
 
 main :: IO ()

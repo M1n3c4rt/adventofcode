@@ -1,10 +1,9 @@
 module Day2021_19 where
 
-import Data.List (transpose, intersect, intersectBy, intercalate)
+import Data.List (transpose, intersect)
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (fromJust, isJust)
-import Data.Function (on)
+import Data.Maybe (fromJust)
 import qualified Data.Set as S
 
 main :: IO ()
@@ -41,7 +40,7 @@ rotationsInverse (x,y,z) =
     ]
 
 offsetL :: [Beacon] -> [Beacon] -> [[Beacon]]
-offsetL ls@((x,y,z):rest) os = concatMap (\(x,y,z) -> map (\(x',y',z') -> map (\(x'',y'',z'') -> (x''-x+x',y''-y+y',z''-z+z')) ls) os) ls
+offsetL ls@((_,_,_):rest) os = concatMap (\(x,y,z) -> map (\(x',y',z') -> map (\(x'',y'',z'') -> (x''-x+x',y''-y+y',z''-z+z')) ls) os) ls
 
 rotateL :: [Beacon] -> [[Beacon]]
 rotateL = transpose . map rotations

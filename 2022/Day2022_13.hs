@@ -19,7 +19,7 @@ newtype Packet = P [Either Int Packet] deriving (Show, Eq)
 
 instance Read Packet where
     readsPrec :: Int -> ReadS Packet
-    readsPrec _ s = [(fromRight (P []) $ r' s,"")]
+    readsPrec _ s' = [(fromRight (P []) $ r' s',"")]
         where r n ds (s:ss)
                 | s == '[' = r (n+1) (s:ds) ss
                 | s == ']' = r (n-1) (s:ds) ss

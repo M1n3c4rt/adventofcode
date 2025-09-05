@@ -1,8 +1,5 @@
 module Day2020_09 where
 
-import Utility.AOC (choose)
-import Data.List (sort)
-
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2020/09.txt"

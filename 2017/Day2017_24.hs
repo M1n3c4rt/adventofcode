@@ -1,5 +1,5 @@
 module Day2017_24 where
-import Data.List.Extra (splitOn, delete, groupSortOn, maximumOn)
+import Data.List.Extra (splitOn, delete, maximumOn)
 
 main :: IO ()
 main = do

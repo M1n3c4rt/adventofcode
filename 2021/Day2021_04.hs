@@ -26,7 +26,7 @@ punchCards (n:ns) cs =
     let updateCard = map (map (\(k,b) -> if k==n then (k,not b) else (k,b)))
         newcs = map updateCard cs
         winners = filter isWinner newcs
-        isWinner cs = not (all (any snd) cs) || not (all (any snd) $ transpose cs)
+        isWinner cs' = not (all (any snd) cs') || not (all (any snd) $ transpose cs')
     in if null winners then punchCards ns newcs else getScore n $ head winners
 
 punchCards' :: [Int] -> [Card] -> Card -> Int
@@ -34,7 +34,7 @@ punchCards' (n:ns) cs pc =
     let updateCard = map (map (\(k,b) -> if k==n then (k,not b) else (k,b)))
         newcs = map updateCard cs
         notWinners = filter isNotWinner newcs
-        isNotWinner cs = not (not (all (any snd) cs) || not (all (any snd) $ transpose cs))
+        isNotWinner cs' = not (not (all (any snd) cs') || not (all (any snd) $ transpose cs'))
     in if null notWinners then getScore n (updateCard pc) else punchCards' ns newcs (head notWinners)
 
 getScore :: Int -> Card -> Int

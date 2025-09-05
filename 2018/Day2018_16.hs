@@ -1,6 +1,6 @@
 module Day2018_16 where
 import Data.Bits ((.&.), Bits ((.|.)))
-import Data.Maybe (isNothing, mapMaybe, fromJust)
+import Data.Maybe (fromJust)
 import Data.List.Split (splitOn)
 import Data.Bifunctor (second)
 
@@ -22,8 +22,8 @@ parseBottom = map ((\[a,b,c,d] -> (a,b,c,d)) . map read . words) . lines . last 
 getPossible :: [Int] -> (Int, Int, Int) -> [Int] -> [String]
 getPossible rs@[x,y,z,w] (a,b,c) target = map fst $ filter ((==target) . snd) $ allOps rs (a,b,c)
     where
-        insertAt 0 (x:xs) y = y:xs
-        insertAt n (x:xs) y = x:insertAt (n-1) xs y
+        insertAt 0 (x':xs) y' = y':xs
+        insertAt n (x':xs) y' = x':insertAt (n-1) xs y'
 
 run :: [(Int, String)] -> [Int] -> (Int, Int, Int, Int) -> [Int]
 run table rs (r,a,b,c) = fromJust $ lookup (fromJust $ lookup r table) $ allOps rs (a,b,c)

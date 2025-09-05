@@ -18,12 +18,12 @@ parseInput ss = let m:ms = splitOn "\n\n" ss in
     (map read . words . tail $ dropWhile (/=':') m,map (map ((\[a,b,c] -> (b,b+c,a,a+c)) . map read . words) . tail . lines) ms)
 
 sliceRange :: Map -> (Int,Int) -> [(Int,Int)]
-sliceRange ((p,q,r,s):map) (a,b)
-    | p >= b || q <= a = sliceRange map (a,b)
+sliceRange ((p,q,r,s):map') (a,b)
+    | p >= b || q <= a = sliceRange map' (a,b)
     | a >= p && b <= q = [(a+offset,b+offset)]
-    | a >= p && b > q = (a+offset,q+offset):sliceRange map (q,b)
-    | a < p && b <= q = (p+offset,b+offset):sliceRange map (a,p)
-    | a < p && b > q = (p+offset,q+offset):([(a,p),(q,b)] >>= sliceRange map)
+    | a >= p && b > q = (a+offset,q+offset):sliceRange map' (q,b)
+    | a < p && b <= q = (p+offset,b+offset):sliceRange map' (a,p)
+    | a < p && b > q = (p+offset,q+offset):([(a,p),(q,b)] >>= sliceRange map')
     where offset = r-p
 sliceRange [] (a,b) = [(a,b)]
 

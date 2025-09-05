@@ -2,8 +2,6 @@ module Day2015_23 where
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust)
 import Text.Read (readMaybe)
-import Debug.Trace (traceShow, traceShowId)
-import Utility.AOC (traceSleepSeconds)
 
 main :: IO ()
 main = do

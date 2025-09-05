@@ -1,5 +1,5 @@
 module Day2015_05 where
-import Data.List.Extra (chunksOf, group, sort)
+import Data.List.Extra (chunksOf, group)
 
 main :: IO ()
 main = do

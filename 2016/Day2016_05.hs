@@ -2,7 +2,6 @@
 module Day2016_05 where
 
 import Data.Hash.MD5 ( md5s, Str(Str) )
-import Data.List (sortOn)
 import Control.Concurrent (threadDelay)
 
 main :: IO ()

@@ -1,6 +1,5 @@
 module Day2019_23 where
 import qualified Data.HashMap.Strict as HM
-import Data.List.Split (splitOn)
 import Data.List (sortOn)
 import Intcode ( CompilerState(NeedsInput), parse, run, runC, getOutput )
 

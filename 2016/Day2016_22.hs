@@ -1,12 +1,8 @@
 {-# LANGUAGE FlexibleContexts #-}
 module Day2016_22 where
-import Utility.AOC (numbers', choose, permute, neighbours4, prettyPrintHM)
+import Utility.AOC (numbers', permute, neighbours4, prettyPrintHM)
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (mapMaybe)
-import Data.Hashable (Hashable)
-import qualified Data.Heap as H
-import Data.List.Extra (minimumOn, nub)
-import Debug.Trace (traceShow, traceShowId)
+import Data.List.Extra (nub)
 import qualified Data.Set as S
 
 main :: IO ()
@@ -35,10 +31,10 @@ neighbours (goal,nodes) = nub $ map adjustState candidates
             let Just (ua,aa) = HM.lookup a nodes
                 Just (ub,ab) = HM.lookup b nodes
             in (if a == goal then (b,) else (goal,)) $ HM.insert a (0,ua+aa) $ HM.insert b (ub+ua,ab-ua) nodes
-        helper k v = filter (\k' -> case HM.lookup k' nodes of Just v -> (if v == goal then viable' else viable) vk v; Nothing -> False) $ neighbours4 k
+        helper k v = filter (\k' -> case HM.lookup k' nodes of Just v' -> (if v' == goal then viable' else viable) vk v'; Nothing -> False) $ neighbours4 k
             where Just vk = HM.lookup k nodes
 
 floodFill :: S.Set State -> S.Set State -> Int
 floodFill finished frontier
     | any ((==(0,0)) . fst) frontier = 0
-    | otherwise = 1 + traceShow (S.size frontier) floodFill (S.union finished frontier) (S.filter (\x -> S.notMember x frontier && S.notMember x finished) $ S.unions $ S.map (S.fromList . neighbours) frontier)
+    | otherwise = 1 + floodFill (S.union finished frontier) (S.filter (\x -> S.notMember x frontier && S.notMember x finished) $ S.unions $ S.map (S.fromList . neighbours) frontier)

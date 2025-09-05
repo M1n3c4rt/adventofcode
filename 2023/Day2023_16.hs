@@ -2,7 +2,6 @@ module Day2023_16 where
 
 import qualified Data.Set as S
 import qualified Data.HashMap.Strict as HM
-import qualified Data.Bifunctor
 
 main :: IO ()
 main = do

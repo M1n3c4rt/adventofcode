@@ -1,7 +1,6 @@
 module Day2024_06 where
 
-import System.IO ( hClose, hGetContents, openFile, IOMode(ReadMode) )
-import Data.List ( sort, transpose, intercalate )
+import Data.List (transpose)
 
 main :: IO ()
 main = do

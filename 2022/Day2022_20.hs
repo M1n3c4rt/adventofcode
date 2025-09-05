@@ -1,8 +1,6 @@
 module Day2022_20 where
 
-import qualified Data.HashMap.Strict as HM
 import qualified Data.Set as S
-import Data.Maybe (fromJust)
 
 main :: IO ()
 main = do
@@ -24,7 +22,7 @@ parse = S.fromList . zip3 [0..] [0..] . map read . lines
 move :: Int -> Int -> List -> List
 move size n ls =
     let (new,val) = search (\(a,_,c) -> (a,c)) (\(_,b,_) -> b) n ls
-        moved_index = let n = new+val in n `mod` (size - 1)
+        moved_index = let n' = new+val in n' `mod` (size - 1)
         new_ls
             | moved_index < new = S.insert (moved_index,n,val) $ S.delete (new,n,val) $ S.map (\(a,b,c) -> if a >= moved_index && a < new then (a+1,b,c) else (a,b,c)) ls
             | moved_index > new = S.insert (moved_index,n,val) $ S.delete (new,n,val) $ S.map (\(a,b,c) -> if a <= moved_index && a > new then (a-1,b,c) else (a,b,c)) ls

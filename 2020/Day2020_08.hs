@@ -23,10 +23,10 @@ parse = map f
             where stripPlus cs@(c:rest) = if c == '+' then rest else cs
 
 parse' :: [[Char]] -> [[(Int, (Int, Int) -> (Int, Int))]]
-parse' (l:lines) = case splitAt 4 l of
-    ("jmp ",num) -> ((0,\(c,n) -> (c+1,n)):parse lines):map ((0,\(c,n) -> (c+read (stripPlus num),n)):) (parse' lines)
-    ("acc ",num) -> map ((0,\(c,n) -> (c+1,n+read (stripPlus num))):) (parse' lines) 
-    ("nop ",num) -> ((0,\(c,n) -> (c+read (stripPlus num),n)):parse lines):map ((0,\(c,n) -> (c+1,n)):) (parse' lines)
+parse' (l:ls) = case splitAt 4 l of
+    ("jmp ",num) -> ((0,\(c,n) -> (c+1,n)):parse ls):map ((0,\(c,n) -> (c+read (stripPlus num),n)):) (parse' ls)
+    ("acc ",num) -> map ((0,\(c,n) -> (c+1,n+read (stripPlus num))):) (parse' ls) 
+    ("nop ",num) -> ((0,\(c,n) -> (c+read (stripPlus num),n)):parse ls):map ((0,\(c,n) -> (c+1,n)):) (parse' ls)
     where stripPlus cs@(c:rest) = if c == '+' then rest else cs
 parse' [] = []
 

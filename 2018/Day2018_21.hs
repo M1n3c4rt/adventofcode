@@ -19,7 +19,7 @@ getLastUnique finished (x:y:ys)
     | otherwise = getLastUnique (S.insert x finished) (y:ys)
 
 parses :: [String] -> (Int,[(String,[Int])]) 
-parses (l:lines) = (read $ drop 4 l,map parse lines)
+parses (l:ls) = (read $ drop 4 l,map parse ls)
     where parse line = let (a,b) = splitAt 4 line in (a,map read $ words b)
 
 run :: Int -> Int -> [(String, [Int])] -> [Int] -> [Int]

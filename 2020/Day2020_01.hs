@@ -1,6 +1,5 @@
 module Day2020_01 where
 
-import Utility.AOC
 import Data.Maybe (fromJust)
 
 main :: IO ()

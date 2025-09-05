@@ -1,7 +1,6 @@
 module Day2016_14 where
 import Data.List (group, find)
-import Data.Maybe (isJust, mapMaybe)
-import Control.Arrow (Arrow(second))
+import Data.Maybe (mapMaybe)
 import Crypto.Hash.MD5 ( hash )
 import Data.ByteString.Char8 (pack, unpack)
 import Data.ByteString.Base16 (encode)

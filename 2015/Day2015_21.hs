@@ -35,7 +35,7 @@ rings = [
         (80,0,3)
     ]
 
-combos = [foldr (\(a,b,c) (d,e,f) -> (a+d,b+e,c+f)) (0,0,0) (w:a++r) | w <- weapons, a <- []:map pure armor, r <- []:map pure rings++choose 2 rings]
+combos = [foldr (\(a',b,c) (d,e,f) -> (a'+d,b+e,c+f)) (0,0,0) (w:a++r) | w <- weapons, a <- []:map pure armor, r <- []:map pure rings++choose 2 rings]
 
 battle ((ph,(pg,pa,pd)),(bh,(bg,ba,bd))) =
     let playerAttack = bh-max 1 (pa-bd)

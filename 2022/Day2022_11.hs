@@ -36,7 +36,7 @@ getLcm = product . map (read . last . words . (!!3) . lines) . splitOn "\n\n"
 
 pass :: Bool -> Integer -> Integer -> Monkeys -> [Integer]
 pass r l 0 old = map (\(a,b,c,d) -> a) $ HM.elems old
-pass r l n old = pass r l (n-1) $ subpass 0 old
+pass r l n' old = pass r l (n'-1) $ subpass 0 old
     where subpass n m = case HM.lookup n m of
                             Just monkey -> subpass (n+1) (helper n monkey m)
                             Nothing -> m
@@ -46,4 +46,4 @@ pass r l n old = pass r l (n-1) $ subpass 0 old
                 newm' = HM.adjust (\(a,b,c,d) -> (a,newi:b,c,d)) next m
                 newm = HM.adjust (\(a,b,c,d) -> (a+1,tail b,c,d)) n newm'
             in helper n (passes, items, transform, test) newm
-          helper n (_,[],_,_) m = m
+          helper _ (_,[],_,_) m = m

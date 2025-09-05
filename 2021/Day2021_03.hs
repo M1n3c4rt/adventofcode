@@ -1,8 +1,7 @@
 module Day2021_03 where
 
-import Data.List (transpose, sort, group, maximumBy, minimumBy, sortBy)
+import Data.List (transpose, sort, group, maximumBy, minimumBy)
 import Data.Function (on)
-import Data.Ord (comparing, Down (Down))
 
 main :: IO ()
 main = do

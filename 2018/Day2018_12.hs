@@ -1,7 +1,6 @@
 module Day2018_12 where
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Set as S
-import Utility.AOC (extrapolate)
 
 main :: IO ()
 main = do
@@ -18,7 +17,7 @@ diffList (x:y:ys) = (y-x):diffList (y:ys)
 diffList [x] = []
 
 parse :: [String] -> (String, HM.HashMap String Char)
-parse (l:lines) = (drop 15 l,HM.fromList $ map (\l -> (take 5 l, l !! 9)) $ tail lines)
+parse (l:ls) = (drop 15 l,HM.fromList $ map (\l' -> (take 5 l', l' !! 9)) $ tail ls)
 
 setify :: (String, HM.HashMap String Char) -> (S.Set Int, HM.HashMap (S.Set Int) Bool)
 setify (s,ss) = (plants s, HM.map (=='#') $ HM.mapKeys (S.map (+(-2)) . plants) ss)

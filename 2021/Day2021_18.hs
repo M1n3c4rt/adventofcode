@@ -1,7 +1,5 @@
 module Day2021_18 where
 
-import qualified Data.HashMap.Strict as HM
-
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2021/18.txt"

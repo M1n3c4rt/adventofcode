@@ -1,7 +1,6 @@
 module Day2020_10 where
 
 import Data.List (sort, group)
-import Data.MemoUgly (memo)
 
 main :: IO ()
 main = do

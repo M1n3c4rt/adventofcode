@@ -1,6 +1,6 @@
 module Day2015_14 where
 import Utility.AOC (numbers)
-import Data.List.Extra (maximumOn, sortOn, groupOn)
+import Data.List.Extra (sortOn, groupOn)
 import qualified Data.HashMap.Strict as HM
 
 main :: IO ()

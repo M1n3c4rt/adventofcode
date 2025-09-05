@@ -2,7 +2,6 @@ module Day2019_12 where
 
 import Data.List (groupBy, findIndices)
 import Data.Function (on)
-import qualified Data.Set as S
 
 main :: IO ()
 main = do

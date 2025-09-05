@@ -33,7 +33,7 @@ getHandType (Hand p q r s t) = case (n,m) of
     (5,0) -> HighCard
     where l@[a,b,c,d,e] = sort [p,q,r,s,t]
           n = length (nub l)
-          unNub (c:cs) | null cs = [] | otherwise = if c `elem` cs then c:unNub cs else unNub cs
+          unNub (c':cs) | null cs = [] | otherwise = if c' `elem` cs then c':unNub cs else unNub cs
           m = length $ nub (unNub l)
 
 

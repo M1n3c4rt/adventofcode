@@ -11,9 +11,9 @@ main = do
     putStrLn $ tail $ draw 0 (1:init vals)
 
 parse :: Int -> [String] -> [Int]
-parse n (l:lines)
-    | length l == 4 = n:parse n lines
-    | otherwise = let added = (n+read (drop 5 l)) in n:added:parse added lines
+parse n (l:ls)
+    | length l == 4 = n:parse n ls
+    | otherwise = let added = (n+read (drop 5 l)) in n:added:parse added ls
 parse n [] = []
 
 draw :: Int -> [Int] -> String

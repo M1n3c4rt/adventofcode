@@ -1,7 +1,6 @@
 module Day2024_11 where
 
 import Data.MemoUgly ( memo )
-import Data.List (intercalate)
 
 main :: IO ()
 main = do

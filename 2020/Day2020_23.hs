@@ -1,6 +1,5 @@
 module Day2020_23 where
 
-import Utility.AOC (extrapolate)
 import Data.Char (isDigit)
 import Data.Maybe (fromJust)
 import qualified Data.HashMap.Strict as HM

@@ -55,4 +55,4 @@ step' grid = S.fromList $ filter helper [(a,b,c,d) | a <- [x-1..x'+1], b <- [y-1
             | otherwise = length (filter (`S.member` grid) ns) == 3
             where
                 ns = neighbours80 p
-                neighbours80 (a,b,c,d) = [(a+p,b+q,c+r,d+s) | p <- [-1,0,1], q <- [-1,0,1], r <- [-1,0,1], s <- [-1,0,1], any (/=0) [p,q,r,s]]
+                neighbours80 (a,b,c,d) = [(a+p',b+q,c+r,d+s) | p' <- [-1,0,1], q <- [-1,0,1], r <- [-1,0,1], s <- [-1,0,1], any (/=0) [p',q,r,s]]

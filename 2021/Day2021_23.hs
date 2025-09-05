@@ -1,6 +1,6 @@
 module Day2021_23 where
 
-import Data.List (elemIndex, sort, delete, minimumBy)
+import Data.List (delete, minimumBy)
 import Data.Maybe (fromJust, mapMaybe)
 import qualified Data.HashMap.Strict as HM
 import Data.MemoUgly (memo)
@@ -42,11 +42,11 @@ nexts :: State -> [(Int,State)]
 nexts (hw,cs) =
     let hwcandidates = filter (\(n,t) -> reachable [n] t hw [] && all (==t) (fromJust $ HM.lookup t cs)) hw
         hwstates = map (\(n,t) -> ((energyFromColumn t *) $ abs (n-t) + 2 - length (fromJust $ HM.lookup t cs),(delete (n,t) hw,HM.adjust (t:) t cs))) hwcandidates
-        csstates = HM.foldrWithKey helper [] cs
-        helper k v a
+        csstates = HM.foldrWithKey nextsHelper [] cs
+        nextsHelper k v a
           | all (==k) v = a
           | otherwise =
-            let reachables = filter (\v -> reachable [k] v hw []) [0,1,3,5,7,9,10]
+            let reachables = filter (\v' -> reachable [k] v' hw []) [0,1,3,5,7,9,10]
                 lengths = map (\n -> (n, (energyFromColumn (head v) *) $ abs (k-n) + 3 - length v)) reachables
                 states = map (\(n,l) -> (l,((n,head v):hw,HM.adjust tail k cs))) lengths
             in states ++ a
@@ -74,11 +74,11 @@ nexts' :: State -> [(Int,State)]
 nexts' (hw,cs) =
     let hwcandidates = filter (\(n,t) -> reachable [n] t hw [] && all (==t) (fromJust $ HM.lookup t cs)) hw
         hwstates = map (\(n,t) -> ((energyFromColumn t *) $ abs (n-t) + 4 - length (fromJust $ HM.lookup t cs),(delete (n,t) hw,HM.adjust (t:) t cs))) hwcandidates
-        csstates = HM.foldrWithKey helper [] cs
-        helper k v a
+        csstates = HM.foldrWithKey nexts'Helper [] cs
+        nexts'Helper k v a
           | all (==k) v = a
           | otherwise =
-            let reachables = filter (\v -> reachable [k] v hw []) [0,1,3,5,7,9,10]
+            let reachables = filter (\v' -> reachable [k] v' hw []) [0,1,3,5,7,9,10]
                 lengths = map (\n -> (n, (energyFromColumn (head v) *) $ abs (k-n) + 5 - length v)) reachables
                 states = map (\(n,l) -> (l,((n,head v):hw,HM.adjust tail k cs))) lengths
             in states ++ a

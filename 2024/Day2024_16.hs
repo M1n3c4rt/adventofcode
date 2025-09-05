@@ -47,7 +47,7 @@ isNode l (x,y)
     | otherwise = True
 
 expand :: [String] -> Node -> [(Node,Int)]
-expand l (x,y,a,b) = filter (\x -> snd x `notElem` [0,1000]) [extend l (x,y,a,b), addT 1000 $ extend l (x,y,-b,a), addT 1000 $ extend l (x,y,b,-a)]
+expand l (x,y,a,b) = filter (\x' -> snd x' `notElem` [0,1000]) [extend l (x,y,a,b), addT 1000 $ extend l (x,y,-b,a), addT 1000 $ extend l (x,y,b,-a)]
 
 extend :: [String] -> Node -> (Node, Int)
 extend l (x,y,a,b)

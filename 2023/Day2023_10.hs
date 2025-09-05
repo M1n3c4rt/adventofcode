@@ -1,7 +1,7 @@
 module Day2023_10 where
 
 import qualified Data.HashMap.Strict as HM
-import Data.List (findIndex, elemIndex, nub)
+import Data.List (findIndex, elemIndex)
 import qualified Data.Set as S
 
 main :: IO ()

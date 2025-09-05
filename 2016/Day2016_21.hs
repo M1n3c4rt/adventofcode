@@ -1,7 +1,5 @@
 module Day2016_21 where
 import Data.List (sortOn, find, permutations)
-import Debug.Trace (traceShowId, traceShow)
-import Data.Bifunctor (Bifunctor(bimap))
 
 main :: IO ()
 main = do
@@ -41,6 +39,6 @@ unop s (SwapP a b) = op s (SwapP a b)
 unop s (SwapL x y) = op s (SwapL x y)
 unop s (Rotate a) = op s (Rotate (-a))
 unop s (RotateB x) = op s (Rotate 0)
-    where Just (i,_) = traceShow s $ find ((==x) . snd) s
+    where Just (i,_) = find ((==x) . snd) s
 unop s (Reverse a b) = op s (Reverse a b)
 unop s (Move a b) = op s (Move b a)

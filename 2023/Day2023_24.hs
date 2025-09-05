@@ -3,7 +3,7 @@ module Day2023_24 where
 import Data.List.Split (splitOn)
 import Data.Ratio (Ratio, (%), numerator)
 import Data.Maybe (mapMaybe)
-import Data.Matrix ( fromList, inverse, toList, toLists )
+import Data.Matrix ( fromList, inverse, toLists )
 
 main :: IO ()
 main = do

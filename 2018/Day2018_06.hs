@@ -1,8 +1,8 @@
 module Day2018_06 where
 import qualified Data.Set as S
 import Data.Function (on)
-import Utility.AOC (taxicab2, floodFillWith, neighbours4)
-import Data.Foldable (minimumBy, maximumBy)
+import Utility.AOC (taxicab2, neighbours4)
+import Data.Foldable (minimumBy)
 
 main :: IO ()
 main = do

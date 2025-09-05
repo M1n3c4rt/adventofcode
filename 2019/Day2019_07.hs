@@ -1,10 +1,7 @@
 module Day2019_07 where
 
-import qualified Data.HashMap.Strict as HM
-import Data.Maybe (fromJust)
-import Data.List.Split (splitOn)
 import Data.List (permutations)
-import Intcode ( CompilerState(Finished, NeedsInput), parse, runC, getOutput, isFinished )
+import Intcode ( CompilerState(Finished), parse, runC, getOutput, isFinished )
 
 main :: IO ()
 main = do
@@ -15,7 +12,7 @@ main = do
     print $ maximum $ map (\x -> runMult' x $ parse contents) $ permutations [5,6,7,8,9]
 
 runMult :: Int -> [Int] -> CompilerState -> Int
-runMult prev inputs state = foldl (\prev i -> head $ (\(Finished (a,b,c,d)) -> d) $ runC [i,prev] state) prev inputs
+runMult prev inputs state = foldl (\prev' i -> head $ (\(Finished (a,b,c,d)) -> d) $ runC [i,prev'] state) prev inputs
 
 runMult' :: [Int] -> CompilerState -> Int
 runMult' [i1,i2,i3,i4,i5] state =

@@ -2,9 +2,6 @@ module Day2019_14 where
 
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Internal.Strict as HM
-import Data.Maybe (fromJust)
-import Data.List (permutations, minimumBy)
-import Data.Function (on)
 
 main :: IO ()
 main = do
@@ -21,16 +18,16 @@ parse line =
     let [rs,p] = splitOn " => " line
         sep x = let [a,b] = words x in (read a,b)
         reagents = map sep $ splitOn ", " rs
-        (count,product) = sep p
-    in (product,(count,reagents))
+        (count,product') = sep p
+    in (product',(count,reagents))
 
 unfold :: HM.HashMap String (Int, [(Int, String)]) -> (Int, String) -> HM.HashMap String Int
-unfold table (amount,product)
-    | product == "ORE" = HM.singleton product amount
+unfold table (amount,product')
+    | product' == "ORE" = HM.singleton product' amount
     | otherwise =
-        let Just (a,rs) = HM.lookup product table
+        let Just (a,rs) = HM.lookup product' table
             (q,r) = amount `divMod` a
-        in (if r == 0 then id else HM.insert product r) $ foldr1 (HM.unionWith (+)) $ map (\(n,r) -> unfold table (q*n,r)) rs
+        in (if r == 0 then id else HM.insert product' r) $ foldr1 (HM.unionWith (+)) $ map (\(n,r') -> unfold table (q*n,r')) rs
 
 isChildOf :: HM.HashMap String (Int, [(Int, String)])  -> String -> String -> Bool
 isChildOf table a b

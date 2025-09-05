@@ -1,7 +1,5 @@
 module Day2019_25 where
-import qualified Data.HashMap.Strict as HM
-import Data.List.Split (splitOn)
-import Data.Char (chr, ord)
+import Data.Char (ord)
 import Intcode ( CompilerState(..), parse, runC, outputChr )
 
 main :: IO ()

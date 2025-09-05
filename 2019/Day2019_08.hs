@@ -2,7 +2,7 @@ module Day2019_08 where
 
 import Data.Foldable (minimumBy)
 import Data.Function (on)
-import Data.List (transpose, intersperse)
+import Data.List (transpose)
 
 main :: IO ()
 main = do

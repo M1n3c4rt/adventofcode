@@ -2,8 +2,7 @@ module Day2023_25 where
 
 import Data.List.Split (splitOn)
 import Utility.AOC ( shortestDistance )
-import Data.Function (on)
-import Data.List (maximumBy, sortOn, delete, nub)
+import Data.List (sortOn, nub)
 import qualified Data.HashMap.Strict as HM
 import Prelude hiding (init)
 

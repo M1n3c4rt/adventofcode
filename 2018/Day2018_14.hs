@@ -1,7 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 module Day2018_14 where
 import qualified Data.HashMap.Strict as HM
-import Data.List (sortOn, intercalate)
+import Data.List (intercalate)
 import Data.Maybe (mapMaybe)
 
 main :: IO ()

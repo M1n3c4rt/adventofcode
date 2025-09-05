@@ -2,7 +2,6 @@ module Day2024_23 where
 
 import Data.List ( maximumBy, intercalate, intersect, nub, sort, union )
 import Data.Function ( on )
-import qualified Data.HashMap.Strict as HM
 import qualified Algebra.Graph.Undirected as G
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
@@ -25,7 +24,7 @@ getTriangles g ns = length $ nub $ concatMap (S.toList . S.map S.fromList) (zipW
 
 getMaxCliques :: G.Graph String -> [String] -> [String] -> [String] -> [[String]]
 getMaxCliques g r [] [] = [r]
-getMaxCliques g r p x = helper (if null p then "aa" else head p) r p x
+getMaxCliques g r' p x' = helper (if null p then "aa" else head p) r' p x'
     where helper u r (q:qs) x | q `S.member` G.neighbours u g = helper u r qs (q:x) | otherwise = getMaxCliques g (r `union` [q]) (p `intersect` S.toList (G.neighbours q g)) (x `intersect` S.toList (G.neighbours q g)) ++ helper u r qs (q:x); helper u r [] x = []
         
 getNodes :: String -> [String]

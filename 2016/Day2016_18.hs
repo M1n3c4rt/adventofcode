@@ -1,5 +1,4 @@
 module Day2016_18 where
-import qualified Data.Set as S
 
 main :: IO ()
 main = do

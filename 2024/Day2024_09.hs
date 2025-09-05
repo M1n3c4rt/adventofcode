@@ -1,7 +1,6 @@
 module Day2024_09 where
 
 import Data.Char (digitToInt)
-import Data.List (intercalate)
 
 main :: IO ()
 main = do
@@ -77,10 +76,10 @@ checkSum n (l:ls) = f (fst3 l) n (snd3 l) + checkSum (n+snd3 l+thd3 l) ls
 checkSum n [] = 0
 
 filter' :: ((Int, Int, Int) -> Bool) -> [(Int, Int, Int)] -> [(Int, Int, Int)]
-filter' f [] = []
-filter' f [x]
-    | f x = []
+filter' f' [] = []
+filter' f' [x]
+    | f' x = []
     | otherwise = [x]
-filter' f (y:x:xs)
-    | f y = y:filter' f (x:xs)
+filter' f' (y:x:xs)
+    | f' y = y:filter' f' (x:xs)
     | otherwise = (fst3 x, snd3 x, thd3 x + snd3 y):xs

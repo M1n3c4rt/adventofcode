@@ -22,6 +22,6 @@ consts (f:finished) frontier stars
     | null newFrontier = consts ([]:(frontier++f):finished) [s] rest
     | otherwise = consts ((frontier++f):finished) newFrontier newStars
     where
-        newFrontier = filter (\s -> any (bordering s) frontier) stars
+        newFrontier = filter (\s' -> any (bordering s') frontier) stars
         newStars = filter (`notElem` newFrontier) stars
         (s,rest) = (head newStars,tail newStars)

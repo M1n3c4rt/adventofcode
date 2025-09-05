@@ -25,4 +25,4 @@ knotHash s = cs
     where
         base = take 256 $ dropWhile ((/=0) . snd) $ cycle $ foldl knot (zip [0..255] [0..255]) $ zip (concat $ replicate 64 $ map ord s ++ [17,31,73,47,23]) [0..]
         cs = concatMap (toHex . foldr1 xor) (chunk 16 $ map fst base :: [[Int]])
-        toHex n = let s = showHex n "" in if length s == 1 then '0':s else s
+        toHex n = let s' = showHex n "" in if length s' == 1 then '0':s' else s'

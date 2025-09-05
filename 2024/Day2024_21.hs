@@ -34,9 +34,9 @@ getShortestPaths hm (l,inputs) = sum $ map (minimum . map ((\k -> getShortestPat
 getTaxicabs :: HM.Hashable p => HM.HashMap p Cell -> p -> p -> [[Dir]]
 getTaxicabs valid x y
     | p == 0 && q == 0 = [[(0,0)]]
-    | p == 0 = [(diffSet . (\x -> x ++ [last x])) (map (a,) [b,b+q..d])]
-    | q == 0 = [(diffSet . (\x -> x ++ [last x])) (map (,b) [a,a+p..c])]
-    | otherwise = map (diffSet . (\x -> x ++ [last x])) (filter (all (`elem` HM.elems valid)) [map (,b) [a,a+p..(c-p)] ++ map (c,) [b,b+q..d],map (a,) [b,b+q..(d-q)] ++ map (,d) [a,a+p..c]])
+    | p == 0 = [(diffSet . (\x' -> x' ++ [last x'])) (map (a,) [b,b+q..d])]
+    | q == 0 = [(diffSet . (\x' -> x' ++ [last x'])) (map (,b) [a,a+p..c])]
+    | otherwise = map (diffSet . (\x' -> x' ++ [last x'])) (filter (all (`elem` HM.elems valid)) [map (,b) [a,a+p..(c-p)] ++ map (c,) [b,b+q..d],map (a,) [b,b+q..(d-q)] ++ map (,d) [a,a+p..c]])
     where (a,b) = HM.findWithDefault (0,0) x valid
           (c,d) = HM.findWithDefault (0,0) y valid
           (p,q) = (signum $ c-a, signum $ d-b)

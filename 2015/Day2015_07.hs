@@ -2,7 +2,7 @@ module Day2015_07 where
 import Data.Word (Word16)
 import Text.Read (readMaybe)
 import Data.Maybe (fromJust)
-import Data.Bits
+import Data.Bits ( Bits(shiftR, complement, (.&.), (.|.), shiftL) )
 import qualified Data.HashMap.Lazy as HM
 
 main :: IO ()
@@ -32,9 +32,9 @@ parseLine line = case words line of
             Nothing -> Reg x
 
 resolveCircuit :: HM.HashMap String Op -> HM.HashMap String Word16
-resolveCircuit lookup = final
+resolveCircuit lookup' = final
     where
-        final = HM.map resolve lookup
+        final = HM.map resolve lookup'
         resolve (Const r) = case r of
             Num n -> n
             Reg s -> fromJust $ HM.lookup s final

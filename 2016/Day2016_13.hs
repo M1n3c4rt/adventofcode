@@ -1,7 +1,6 @@
 module Day2016_13 where
-import Utility.AOC (prettyPrintSet, neighbours4)
+import Utility.AOC (neighbours4)
 import qualified Data.Set as S
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

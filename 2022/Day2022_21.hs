@@ -2,7 +2,7 @@ module Day2022_21 where
 
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust)
-import Data.Ratio ( Ratio, (%), numerator, denominator )
+import Data.Ratio ( Ratio, (%), numerator )
 
 main :: IO ()
 main = do

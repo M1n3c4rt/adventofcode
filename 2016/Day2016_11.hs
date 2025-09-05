@@ -5,11 +5,9 @@ import qualified Data.HashMap.Strict as HM
 import Utility.AOC (choose)
 import Data.Hashable (Hashable(..))
 import GHC.Generics (Generic)
-import Debug.Trace (traceShow, traceShowId)
-import Data.List (nub, sort, nubBy, intercalate, permutations, group, sortOn)
+import Data.List (sort, nubBy)
 import qualified Data.Set as S
 import Data.Maybe (fromJust)
-import Data.Function (on)
 
 main :: IO ()
 main = do
@@ -48,9 +46,9 @@ goal :: State -> State
 goal (_,m) = (3,HM.fromList [(0,S.empty),(1,S.empty),(2,S.empty),(3,S.unions $ HM.elems m)])
 
 floodFill :: S.Set State -> S.Set State -> State -> Int
-floodFill finished frontier goal
-    | goal `S.member` frontier = 0
-    | otherwise = traceShow (length frontier) $ 1 + floodFill (clean $ S.union frontier finished) (clean $ S.unions $ S.map (S.filter (`notElem'` finished) . neighbours) frontier) goal
+floodFill finished frontier goal'
+    | goal' `S.member` frontier = 0
+    | otherwise = 1 + floodFill (clean $ S.union frontier finished) (clean $ S.unions $ S.map (S.filter (`notElem'` finished) . neighbours) frontier) goal'
     where clean = S.fromList . nubBy equiv . S.toList
 
 equiv :: State -> State -> Bool
@@ -58,7 +56,7 @@ equiv (n,m) (n',m') = n == n' && pairs m == pairs m'
     where
         element (Gen s) = s; element (Chip s) = s
         items = S.toList . S.map element . S.unions . HM.elems
-        pairs m = sort $ map (\i -> map (\x -> head $ HM.keys $ HM.filter (x `S.member`) m) [Gen i,Chip i]) $ items m
+        pairs k = sort $ map (\i -> map (\x -> head $ HM.keys $ HM.filter (x `S.member`) k) [Gen i,Chip i]) $ items k
         
 instance Hashable Item where
     hash :: Item -> Int

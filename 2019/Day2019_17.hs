@@ -1,11 +1,8 @@
 module Day2019_17 where
 
-import qualified Data.HashMap.Strict as HM
-import Data.List.Split (splitOn)
 import Data.Char (chr, ord)
 import Utility.AOC (enumerateFilter, neighbours4)
 import qualified Data.Set as S
-import Data.List (intersperse)
 import Intcode ( parse, runC, modify, getOutput )
 
 main :: IO ()

@@ -3,8 +3,6 @@ module Day2021_20 where
 import Data.List.Split (splitOn)
 import Data.List (elemIndices)
 import qualified Data.Set as S
-import Data.Foldable (minimumBy, maximumBy)
-import Data.Function (on)
 
 main :: IO ()
 main = do

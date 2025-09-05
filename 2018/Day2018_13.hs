@@ -4,7 +4,7 @@ import Utility.AOC (enumerateHM)
 import qualified Data.HashMap.Strict as HM
 import Data.Complex ( Complex(..) )
 import Data.Function (on)
-import Data.List (groupBy, sortOn, nubBy)
+import Data.List (groupBy, sortOn)
 
 main :: IO ()
 main = do
@@ -57,7 +57,7 @@ toTrack grid p c = case c of
     'v' -> toTrack grid p '|'
     where
         invert (x:+y) = y:+x
-        invert' (p::Complex Int) = negate $ invert p
+        invert' (p'::Complex Int) = negate $ invert p'
 
 
 moveMinecarts :: HM.HashMap (Complex Int) Track -> [Minecart] -> Complex Int
@@ -106,14 +106,14 @@ instance Show Track where
 
 instance Show Minecart where
     show :: Minecart -> String
-    show (Minecart (x:+y) d t) = show (x,y) ++ " " ++ dir ++ " " ++ trinity
+    show (Minecart (x:+y) d t) = show (x,y) ++ " " ++ dir' ++ " " ++ trinity'
         where
-            dir
+            dir'
                 | d == up = "up"
                 | d == down = "down"
                 | d == left = "left"
                 | otherwise = "right"
-            trinity
+            trinity'
                 | t == tleft = "left"
                 | t == tstraight = "straight"
                 | t == tright = "right"

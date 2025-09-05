@@ -30,14 +30,14 @@ splitTokens cs@(c:rest)
     | c == '(' = let (a,b) = takeNextBracket 1 "" rest in a:splitTokens b
     | otherwise = [c]:if null rest then [] else splitTokens (tail rest)
     where
-        takeNextBracket indent consumed (c:cs)
-            | c == '(' = takeNextBracket (indent+1) (c:consumed) cs
-            | c == ')' = if indent == 1 then (reverse consumed,drop 1 cs) else takeNextBracket (indent-1) (c:consumed) cs
-            | otherwise = takeNextBracket indent (c:consumed) cs
+        takeNextBracket indent consumed (c':cs')
+            | c' == '(' = takeNextBracket (indent+1) (c':consumed) cs'
+            | c' == ')' = if indent == 1 then (reverse consumed,drop 1 cs') else takeNextBracket (indent-1) (c':consumed) cs'
+            | otherwise = takeNextBracket indent (c':consumed) cs'
 splitTokens [] = []
 
 solveExp :: Exp -> Int
-solveExp exp = case exp of
+solveExp exp' = case exp' of
     Num n -> n
     Sum a b -> solveExp a + solveExp b
     Product a b -> solveExp a * solveExp b

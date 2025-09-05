@@ -4,8 +4,6 @@ import qualified Data.HashMap.Strict as HM
 import Data.Maybe (mapMaybe)
 import Data.Foldable (maximumBy, find)
 import Data.Function (on)
-import Data.List (sortOn)
-import qualified Data.Bifunctor
 
 main :: IO ()
 main = do

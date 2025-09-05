@@ -1,5 +1,5 @@
 module Day2018_15 where
-import Utility.AOC (enumerateHM, enumerateFilterSet, taxicab2, neighbours4, enumerateFilter)
+import Utility.AOC (enumerateFilterSet, neighbours4, enumerateFilter)
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Set as S
 import Data.Foldable (minimumBy)

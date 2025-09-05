@@ -34,7 +34,7 @@ getNodes (x,y) grid = let
     right = [((x+n,y,1,0),sum $ map (\k -> grid !? (y,x+k)) [1..n]) | n <- [1..3]]
     up = [((x,y-n,0,-1),sum $ map (\k -> grid !? (y-k,x)) [1..n]) | n <- [1..3]]
     down = [((x,y+n,0,1),sum $ map (\k -> grid !? (y+k,x)) [1..n]) | n <- [1..3]] in
-        map (Data.Bifunctor.second (filter (\ ((x, y, a, b), n) -> inBounds (x, y)))) [((x,y,-1,0),up ++ down),
+        map (Data.Bifunctor.second (filter (\ ((x', y', a, b), n) -> inBounds (x', y')))) [((x,y,-1,0),up ++ down),
         ((x,y,1,0),up ++ down),
         ((x,y,0,-1),left ++ right),
         ((x,y,0,1),left ++ right)]
@@ -45,7 +45,7 @@ getNodes' (x,y) grid = let
     right = [((x+n,y,1,0),sum $ map (\k -> grid !? (y,x+k)) [1..n]) | n <- [4..10]]
     up = [((x,y-n,0,-1),sum $ map (\k -> grid !? (y-k,x)) [1..n]) | n <- [4..10]]
     down = [((x,y+n,0,1),sum $ map (\k -> grid !? (y+k,x)) [1..n]) | n <- [4..10]] in
-        map (Data.Bifunctor.second (filter (\ ((x, y, a, b), n) -> inBounds (x, y)))) [((x,y,-1,0),up ++ down),
+        map (Data.Bifunctor.second (filter (\ ((x', y', a, b), n) -> inBounds (x', y')))) [((x,y,-1,0),up ++ down),
         ((x,y,1,0),up ++ down),
         ((x,y,0,-1),left ++ right),
         ((x,y,0,1),left ++ right)]

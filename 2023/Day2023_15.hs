@@ -26,4 +26,4 @@ add boxes inst
             map (\(label',power') -> if label==label' then (label,power) else (label',power')) l
 
 total :: Boxes -> Int
-total = HM.foldl (+) 0 . HM.mapWithKey (\b l -> (*(b+1)) $ sum $ zipWith (\(l,p) n -> p*n) l [length l,length l-1..1])
+total = HM.foldl (+) 0 . HM.mapWithKey (\b l -> (*(b+1)) $ sum $ zipWith (\(_,p) n -> p*n) l [length l,length l-1..1])

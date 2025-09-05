@@ -17,8 +17,8 @@ parse contents =
     let l = lines contents
         (a,b) = (take 8 l, drop 10 l)
         grid = HM.fromList $ zip [1..] $ map (dropWhile (==' ')) $ transpose $ map takeFours a
-        takeFours [a,b,c] = [b]
-        takeFours (a:b:c:d:ds) = b:takeFours ds
+        takeFours [x,y,z] = [y]
+        takeFours (x:y:z:d:ds) = y:takeFours ds
         insts = map (\s -> (read $ takeWhile (/=' ') $ drop 5 s, read [reverse s !! 5], read [last s])) b
     in (grid,insts)
 

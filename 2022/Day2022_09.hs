@@ -23,20 +23,20 @@ parse = concatMap helper . lines
 
 move :: [(Int,Int)] -> [(Int,Int)] -> [(Int,Int)]
 move rope (d:dirs) = let newrope = submove rope d in last newrope : move newrope dirs
-    where submove (h:t:rs) d
-            | abs a <= 1 && abs b <= 1 = (h+d):t:rs
-            | otherwise = (h+d):submove (t:rs) (signum a, signum b)
-            where (a,b) = h+d-t
-          submove [h] d = [h+d]
+    where submove (h:t:rs) d'
+            | abs a <= 1 && abs b <= 1 = (h+d'):t:rs
+            | otherwise = (h+d'):submove (t:rs) (signum a, signum b)
+            where (a,b) = h+d'-t
+          submove [h] d' = [h+d']
 move rope [] = [last rope]
 
 move' :: [(Int,Int)] -> [(Int,Int)] -> [[(Int,Int)]]
 move' rope (d:dirs) = let newrope = submove rope d in newrope : move' newrope dirs
-    where submove (h:t:rs) d
-            | abs a <= 1 && abs b <= 1 = (h+d):t:rs
-            | otherwise = (h+d):submove (t:rs) (signum a, signum b)
-            where (a,b) = h+d-t
-          submove [h] d = [h+d]
+    where submove (h:t:rs) d'
+            | abs a <= 1 && abs b <= 1 = (h+d'):t:rs
+            | otherwise = (h+d'):submove (t:rs) (signum a, signum b)
+            where (a,b) = h+d'-t
+          submove [h] d' = [h+d']
 move' rope [] = [rope]
 
 instance (Num a, Num b) => Num (a,b) where

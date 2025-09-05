@@ -16,9 +16,9 @@ newtype Tree = Tree ([Tree],[Int]) deriving Show
 parseTree :: [Int] -> (Tree,[Int])
 parseTree (n:m:xs) = let (trees,remaining) = parseTrees n xs in (Tree (trees,take m remaining),drop m remaining)
     where
-        parseTrees 0 rem = ([],rem)
-        parseTrees n [] = ([],[])
-        parseTrees n ns = let (t,rem) = parseTree ns; (ts,rems) = parseTrees (n-1) rem in (t:ts,rems)
+        parseTrees 0 rem' = ([],rem')
+        parseTrees n' [] = ([],[])
+        parseTrees n' ns = let (t,rem') = parseTree ns; (ts,rems) = parseTrees (n'-1) rem' in (t:ts,rems)
 
 sumMetadata :: Tree -> Int
 sumMetadata (Tree (ts,m)) = sum m + sum (map sumMetadata ts)

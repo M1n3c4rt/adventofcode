@@ -3,9 +3,9 @@ module Day2020_20 where
 
 {-# HLINT ignore "Use map" #-}
 import Data.List.Split (splitOn)
-import Data.List (transpose, intercalate)
+import Data.List (transpose)
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (catMaybes, mapMaybe, fromJust, fromMaybe)
+import Data.Maybe (catMaybes, mapMaybe, fromJust)
 import Utility.AOC (neighbours4, enumerateFilter)
 import qualified Data.Set as S
 

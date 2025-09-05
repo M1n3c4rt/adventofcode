@@ -22,14 +22,14 @@ emptyTree :: Tree
 emptyTree = Dir HM.empty
 
 insert :: [String] -> Tree -> [String] -> Tree
-insert current tree (l:lines)
+insert current tree (l:ls)
     | take 4 l == "$ cd" = case drop 5 l of
-        ".." -> insert (tail current) tree lines
-        "/" -> insert [] tree lines
-        s -> insert (s:current) tree lines
+        ".." -> insert (tail current) tree ls
+        "/" -> insert [] tree ls
+        s -> insert (s:current) tree ls
     | isDigit (head l) = let [size,name] = words l in
-        insert current (insFile (reverse current) name (read size) tree) lines
-    | otherwise = insert current tree lines
+        insert current (insFile (reverse current) name (read size) tree) ls
+    | otherwise = insert current tree ls
     where
           insFile :: [String] -> String -> Int -> Tree -> Tree
           insFile [] name size (Dir k) = Dir $ HM.insert name (File size) k

@@ -14,8 +14,8 @@ main = do
 parse :: (Num a, Num b) => [Char] -> (a, b)
 parse s =
     let (row,col) = splitAt 7 s
-        r = sum $ zipWith (*) (map (2^) [6,5..0]) $ map (\c -> if c == 'F' then 0 else 1) row
-        c = sum $ zipWith (*) (map (2^) [2,1,0]) $ map (\c -> if c == 'L' then 0 else 1) col
+        r = sum $ zipWith (*) (map (2^) [6,5..0]) $ map (\c' -> if c' == 'F' then 0 else 1) row
+        c = sum $ zipWith (*) (map (2^) [2,1,0]) $ map (\c' -> if c' == 'L' then 0 else 1) col
     in (r,c)
 
 findEmpty :: (Eq a, Num a) => [a] -> a

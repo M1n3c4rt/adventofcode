@@ -1,6 +1,6 @@
 module Day2017_22 where
 import qualified Data.Set as S
-import Utility.AOC (enumerateFilterSet, enumerateFilter, traceSleepSeconds, prettyPrintHM, traceSleep)
+import Utility.AOC (enumerateFilterSet, enumerateFilter)
 import qualified Data.HashMap.Strict as HM
 
 main :: IO ()
@@ -10,7 +10,6 @@ main = do
     print $ length $ filter (\(a,b,c,d) -> a) $ take 10001 $ iterate burst (False,(12,-12),(0,1),S.map (\(x,y) -> (x,-y)) $ enumerateFilterSet (=='#') contents)
     -- part 2
     print $ length $ filter (\(a,b,c,d) -> a) $ take 10000001 $ iterate burst' (False,(12,-12),(0,1),HM.fromList $ map ((,I) . (\(x,y) -> (x,-y))) (enumerateFilter (=='#') contents))
-    --mapM_ (putStrLn . prettyPrintHM . (\(a,b,c,d) -> HM.map toChar d) . traceSleep 10000) $ take 10000001 $ iterate burst' (False,(12,-12),(0,1),HM.fromList $ map ((,I) . (\(x,y) -> (x,-y))) (enumerateFilter (=='#') contents))
 
 data NodeState = C | W | I | F deriving Show
 

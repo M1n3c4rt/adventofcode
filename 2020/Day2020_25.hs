@@ -1,7 +1,5 @@
 module Day2020_25 where
 
-import Data.List (findIndices)
-
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2020/25.txt"

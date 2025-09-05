@@ -1,6 +1,5 @@
 module Day2019_22 where
-import Data.Ratio (Ratio, (%), denominator, numerator)
-import Utility.AOC (extrapolate)
+import Data.Ratio ((%))
 
 main :: IO ()
 main = do

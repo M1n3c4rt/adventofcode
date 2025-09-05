@@ -1,8 +1,6 @@
 module Day2023_14 where
 
-import Data.List (transpose, sort, groupBy, elemIndex, elemIndices)
-import Data.MemoUgly (memo)
-import Data.Foldable (foldr')
+import Data.List (transpose, sort, groupBy)
 
 main :: IO ()
 main = do

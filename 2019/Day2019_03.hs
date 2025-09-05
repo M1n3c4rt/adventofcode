@@ -2,8 +2,6 @@ module Day2019_03 where
 
 import Data.List.Split (splitOn)
 import Data.Maybe (catMaybes)
-import Data.List (genericReplicate, minimumBy)
-import Data.Function (on)
 
 main :: IO ()
 main = do

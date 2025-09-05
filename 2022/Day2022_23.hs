@@ -8,12 +8,12 @@ main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2022/23.txt"
     -- part 1
-    print $ ground $ (!!9) $ move 0 $ elves $ lines contents
+    print $ ground $ (!!9) $ move 0 $ getElves $ lines contents
     -- part 2
-    print $ (+1) $ length $ move 0 $ elves $ lines contents
+    print $ (+1) $ length $ move 0 $ getElves $ lines contents
 
-elves :: [[Char]] -> S.Set (Int, Int)
-elves l = let el = map (zip [0..]) l in S.fromList $ map (\(a,b,c) -> (a,b)) $ filter (\(a,b,c) -> c == '#') $ map (\(a,b,c) -> (b,a,c)) $ concat $ zipWith (\x y -> map (\t -> (x, fst t, snd t)) y) [0..] el
+getElves :: [[Char]] -> S.Set (Int, Int)
+getElves l = let el = map (zip [0..]) l in S.fromList $ map (\(a,b,c) -> (a,b)) $ filter (\(a,b,c) -> c == '#') $ map (\(a,b,c) -> (b,a,c)) $ concat $ zipWith (\x y -> map (\t -> (x, fst t, snd t)) y) [0..] el
 
 propose :: S.Set (Int,Int) -> Int -> (Int,Int) -> (Int,Int)
 propose elves offset (x,y) =

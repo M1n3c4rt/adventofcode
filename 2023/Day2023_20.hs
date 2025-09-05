@@ -2,7 +2,6 @@ module Day2023_20 where
 
 import qualified Data.HashMap.Strict as HM
 import Data.List.Split (splitOn)
-import Data.List (nubBy)
 
 main :: IO ()
 main = do
@@ -43,7 +42,7 @@ processPulses :: Int -> Modules -> [(String,Bool)] -> [(String,String,Bool)] -> 
 processPulses n ms ((i,pulse):ins) outs = case HM.lookupDefault (Broadcaster []) i ms of
     Button -> processPulses n ms ins ((i,"broadcaster",False):outs)
     Broadcaster ss -> processPulses n ms ins (map (i,,pulse) ss ++ outs)
-    Flip b ss -> if pulse then processPulses n ms ins outs else let newms = HM.adjust (\(Flip c ss) -> Flip (not c) ss) i ms in
+    Flip b ss -> if pulse then processPulses n ms ins outs else let newms = HM.adjust (\(Flip c ss') -> Flip (not c) ss') i ms in
         processPulses n newms ins (map (i,,not b) ss ++ outs)
     Con cins ss ->  processPulses n ms ins (map (i,,not $ and (HM.elems cins)) ss ++ outs)
 
@@ -58,7 +57,7 @@ processPulses n ms [] []
 
 processPulses n ms [] outs =
     let pulses = map (\(a,b,c) -> c) outs
-        combine (low,high) (cycle,l,h) = (cycle,l+low,h+high) in
+        combine (low,high) (cycle',l,h) = (cycle',l+low,h+high) in
     combine (length $ filter not pulses, length $ filter id pulses) $ processPulses n newms (map (\(a,b,c) -> (b,c)) outs) []
     where newms = HM.mapWithKey helper ms
           helper k v = case v of
@@ -69,7 +68,7 @@ processPulses' :: (String,String,Bool) -> Modules -> [(String,Bool)] -> [(String
 processPulses' t ms ((i,pulse):ins) outs = case HM.lookupDefault (Broadcaster []) i ms of
     Button -> processPulses' t ms ins ((i,"broadcaster",False):outs)
     Broadcaster ss -> processPulses' t ms ins (map (i,,pulse) ss ++ outs)
-    Flip b ss -> if pulse then processPulses' t ms ins outs else let newms = HM.adjust (\(Flip c ss) -> Flip (not c) ss) i ms in
+    Flip b ss -> if pulse then processPulses' t ms ins outs else let newms = HM.adjust (\(Flip c ss') -> Flip (not c) ss') i ms in
         processPulses' t newms ins (map (i,,not b) ss ++ outs)
     Con cins ss ->  processPulses' t ms ins (map (i,,not $ and (HM.elems cins)) ss ++ outs)
 

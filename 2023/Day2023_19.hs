@@ -47,7 +47,7 @@ truncateRange :: (Int,Int,Ordering) -> PartRange -> (Maybe PartRange,Maybe PartR
 truncateRange (i,n,o) partrange = 
     let (a,b) = partrange !! i
         genRange f = take i partrange ++ [f (a, b)] ++ drop (i+1) partrange;
-        validateRange xs = if any (\(a,b) -> b-a < 0) xs then Nothing else Just xs;
+        validateRange xs = if any (\(a',b') -> b'-a' < 0) xs then Nothing else Just xs;
         [p, q] = map (validateRange . genRange) [helper, helper']
         in (p, q)
     where helper (r,s)

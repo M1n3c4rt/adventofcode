@@ -1,7 +1,5 @@
 module Day2019_16 where
 
-import Data.List (transpose)
-
 main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2019/16.txt"

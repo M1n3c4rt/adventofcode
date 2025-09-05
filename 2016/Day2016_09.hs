@@ -1,5 +1,5 @@
 module Day2016_09 where
-import Utility.AOC (numbers, extrapolate)
+import Utility.AOC (numbers)
 
 main :: IO ()
 main = do

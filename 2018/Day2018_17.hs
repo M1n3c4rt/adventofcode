@@ -1,7 +1,6 @@
 module Day2018_17 where
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
-import Data.List (nub)
 
 main :: IO ()
 main = do
@@ -10,6 +9,7 @@ main = do
     let water = fall True (maximum $ S.map snd clay) clay S.empty S.empty [(500,minimum $ S.map snd clay)]
     -- part 1
     print $ S.size $ uncurry S.union water
+    -- part 2
     print $ S.size $ fst water
 
 parse :: String -> [(Int,Int)]
@@ -27,13 +27,13 @@ fall isFinished lower clay water unfinished ((x,y):fs)
     | (x,y+1) `elem` fs || (x,y+1) `S.member` unfinished = fall isFinished lower clay water (S.insert (x,y) unfinished) fs
     | otherwise = let (x',y') = safeV (x,y) in fall False lower clay water (S.union (S.fromList $ map (x,) [y..y']) unfinished) (map (x,) [y+1..y'] ++ fs)
     where
-            safeV (x,y)
-                | y == lower = (x,y)
-                | (x,y+1) `S.member` clay || (x,y+1) `S.member` water = (x,y)
-                | otherwise = safeV (x,y+1)
-            safe (x, y) d
-                | (x, y + 1) `S.notMember` clay && (x, y + 1) `S.notMember` water = Left (x, y)
-                | (x + d, y) `S.member` clay || (x + d, y) `S.member` water = Right (x, y)
-                | otherwise = safe (x + d, y) d
+            safeV (x',y')
+                | y' == lower = (x',y')
+                | (x',y'+1) `S.member` clay || (x',y'+1) `S.member` water = (x',y')
+                | otherwise = safeV (x',y'+1)
+            safe (x', y') d
+                | (x', y' + 1) `S.notMember` clay && (x', y' + 1) `S.notMember` water = Left (x', y')
+                | (x' + d, y') `S.member` clay || (x' + d, y') `S.member` water = Right (x', y')
+                | otherwise = safe (x' + d, y') d
             extract (Right a) = a
             extract (Left a) = a

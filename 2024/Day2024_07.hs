@@ -15,7 +15,7 @@ getNumbers :: String -> (Int, [Int])
 getNumbers s = let [a,b] = splitOn ":" s in (read a, map read $ words b)
 
 f :: Int -> [Int] -> [Int]
-f n (x:y:ys) = concat $ filter (\x -> null x || head x <= n) [f n ((x+y):ys),f n ((x*y):ys)]
+f n (x:y:ys) = concat $ filter (\x' -> null x' || head x' <= n) [f n ((x+y):ys),f n ((x*y):ys)]
 f n [x] = [x]
 f n [] = []
 
@@ -23,6 +23,6 @@ f n [] = []
 (~) x y = read $ show x ++ show y
 
 g :: Int -> [Int] -> [Int]
-g n (x:y:ys) = concat $ filter (\x -> null x || head x <= n) [g n ((x+y):ys),g n ((x*y):ys),g n ((x~y):ys)]
+g n (x:y:ys) = concat $ filter (\x' -> null x' || head x' <= n) [g n ((x+y):ys),g n ((x*y):ys),g n ((x~y):ys)]
 g n [x] = [x]
 g n [] = []

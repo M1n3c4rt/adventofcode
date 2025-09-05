@@ -1,7 +1,6 @@
 module Day2016_04 where
 import Data.Char (isDigit, isAlpha, chr, ord)
 import Data.List.Extra (splitOn, sortOn, sort, group)
-import Data.Ord (Down(Down))
 
 main :: IO ()
 main = do

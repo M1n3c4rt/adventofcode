@@ -1,5 +1,4 @@
 module Day2018_11 where
-import qualified Data.HashMap.Strict as HM
 import Data.Foldable (maximumBy)
 import Data.Function (on)
 import Data.MemoUgly (memo)

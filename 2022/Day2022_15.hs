@@ -8,7 +8,6 @@ main :: IO ()
 main = do
     contents <- readFile "/home/miney/code/haskell/adventofcode/2022/15.txt"
     let p = parse contents
-    let ((a,b),(c,d)) = bounds p
     let r = rads p
     let is = map intercepts r
     -- part 1
@@ -16,8 +15,8 @@ main = do
     let Just n = fmap fst $ find (`insideRegion` r) $ map (,2000000) [5000000,4999999..]
     print $ n - m
     -- part 2
-    let a = diff2s $ sort $ concatMap (\(a,b,c,d) -> [a,b]) is
-    let b = diff2s $ sort $ concatMap (\(a,b,c,d) -> [c,d]) is
+    let a = diff2s $ sort $ concatMap (\(a',b',c,d) -> [a',b']) is
+    let b = diff2s $ sort $ concatMap (\(a',b',c,d) -> [c,d]) is
     print $ 4000000*((b-a)`div`2)+((b+a)`div`2)
 
 parse :: String -> [((Int, Int), (Int, Int))]

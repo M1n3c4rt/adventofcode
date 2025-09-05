@@ -40,17 +40,17 @@ parseOperator :: String -> ([Packet],String)
 parseOperator ('0':ss) =
     let (l,rest) = splitAt 15 ss
         l' = binToDec l
-        helper n rem
-            | n >= l' = ([],rem)
-            | otherwise = let (parsed,r) = parsePacket rem in Data.Bifunctor.first (parsed:) $ helper (n + length rem - length r) r
+        helper n rem'
+            | n >= l' = ([],rem')
+            | otherwise = let (parsed,r) = parsePacket rem' in Data.Bifunctor.first (parsed:) $ helper (n + length rem' - length r) r
     in helper 0 rest
 
 parseOperator ('1':ss) =
     let (l,rest) = splitAt 11 ss
         l' = binToDec l
-        helper n rem
-            | n >= l' = ([],rem)
-            | otherwise = let (parsed,r) = parsePacket rem in Data.Bifunctor.first (parsed:) $ helper (n+1) r
+        helper n rem'
+            | n >= l' = ([],rem')
+            | otherwise = let (parsed,r) = parsePacket rem' in Data.Bifunctor.first (parsed:) $ helper (n+1) r
     in helper 0 rest
 
 foldVersions :: Packet -> Int

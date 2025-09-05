@@ -1,9 +1,8 @@
 module Day2016_24 where
 import qualified Data.HashMap.Strict as HM
-import Utility.AOC (enumerateHM, neighbours4, choose, shortestDistanceWith, permute)
+import Utility.AOC (enumerateHM, neighbours4, shortestDistanceWith, permute)
 import Data.Maybe (mapMaybe, fromJust)
 import Data.List (permutations)
-import Debug.Trace (traceShowId, traceShow)
 
 main :: IO ()
 main = do
@@ -27,7 +26,7 @@ lookupTable :: HM.HashMap (Int, Int) Char -> HM.HashMap (Char, Char) Int
 lookupTable grid = HM.fromList $ map (\[(m,c),(n,d)] -> ((c,d),) $ fromJust $ shortestDistanceWith (map (,1) . neighbours grid) m n) $ permute 2 $ pointsOfInterest grid
 
 distanceFromOrder :: HM.HashMap (Char, Char) Int -> String -> Int
-distanceFromOrder lookup ord = sum $ zipWith (\a b -> fromJust $ HM.lookup (a,b) lookup) ord (tail ord)
+distanceFromOrder lookup' ord = sum $ zipWith (\a b -> fromJust $ HM.lookup (a,b) lookup') ord (tail ord)
 
 genStrings :: HM.HashMap (Int, Int) Char -> [String]
 genStrings grid = map ('0':) $ permutations $ filter (/='0') $ map snd $ pointsOfInterest grid

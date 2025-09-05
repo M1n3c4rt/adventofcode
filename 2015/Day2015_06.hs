@@ -1,7 +1,5 @@
 module Day2015_06 where
-import Utility.AOC (rangeIntersect, numbers)
-import Data.Maybe (isNothing, mapMaybe)
-import Debug.Trace (traceShow)
+import Utility.AOC (numbers)
 import qualified Data.Set as S
 import qualified Data.HashMap.Strict as HM
 

@@ -1,8 +1,7 @@
 module Day2015_19 where
 import Data.Maybe (fromJust, mapMaybe)
 import qualified Data.HashMap.Strict as HM
-import Debug.Trace (traceShow, traceShowId)
-import Data.List (nub, groupBy)
+import Data.List (nub)
 import System.Random (Random(randomR), mkStdGen, StdGen)
 
 main :: IO ()

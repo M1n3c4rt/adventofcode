@@ -1,7 +1,6 @@
 module Day2021_06 where
 
 import Data.MemoUgly ( memo )
-import Data.List (intercalate, genericLength)
 import Data.List.Split (splitOn)
 
 main :: IO ()

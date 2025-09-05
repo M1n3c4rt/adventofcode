@@ -1,8 +1,7 @@
 module Day2015_09 where
-import Utility.AOC (choose, permute)
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (catMaybes)
-import Data.List.Extra (minimumOn, permutations)
+import Data.List.Extra (permutations)
 
 main :: IO ()
 main = do

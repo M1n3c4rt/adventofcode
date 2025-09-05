@@ -4,7 +4,6 @@ import Data.ByteString.Char8 (unpack, pack)
 import Data.ByteString.Base16 (encode)
 import Crypto.Hash.MD5 (hash)
 import Data.Bifunctor (bimap)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

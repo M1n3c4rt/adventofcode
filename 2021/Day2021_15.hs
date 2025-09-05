@@ -22,11 +22,11 @@ enumerate l = let el = map (zip [0..]) l in HM.fromList $ map (\(a,b,c) -> ((b,a
 
 expandHorizontal :: Int -> Int -> HM.HashMap (Int,Int) Int -> HM.HashMap (Int,Int) Int
 expandHorizontal 0 width ms = ms
-expandHorizontal n width ms = HM.union ms $ expandHorizontal (n-1) width $ HM.map (\n -> if n /= 9 then n+1 else 1) $ HM.mapKeys (\(x,y) -> (x+width,y)) ms
+expandHorizontal n width ms = HM.union ms $ expandHorizontal (n-1) width $ HM.map (\n' -> if n' /= 9 then n'+1 else 1) $ HM.mapKeys (\(x,y) -> (x+width,y)) ms
 
 expandVertical :: Int -> Int -> HM.HashMap (Int,Int) Int -> HM.HashMap (Int,Int) Int
 expandVertical 0 height ms = ms
-expandVertical n height ms = HM.union ms $ expandVertical (n-1) height $ HM.map (\n -> if n /= 9 then n+1 else 1) $ HM.mapKeys (\(x,y) -> (x,y+height)) ms
+expandVertical n height ms = HM.union ms $ expandVertical (n-1) height $ HM.map (\n' -> if n' /= 9 then n'+1 else 1) $ HM.mapKeys (\(x,y) -> (x,y+height)) ms
 
 getGraph :: HM.HashMap (Int,Int) Int -> HM.HashMap (Int,Int) [((Int,Int),Int)]
 getGraph ms = HM.foldrWithKey helper HM.empty ms

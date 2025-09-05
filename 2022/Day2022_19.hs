@@ -1,7 +1,6 @@
 module Day2022_19 where
 
 import Data.Char (isDigit)
-import Data.List (nub, sortOn)
 
 main :: IO ()
 main = do

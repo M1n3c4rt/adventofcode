@@ -1,10 +1,6 @@
 module Day2019_15 where
 
-import qualified Data.HashMap.Strict as HM
-import Data.List.Split (splitOn)
-import Data.Maybe (fromJust, mapMaybe)
-import Data.Ord (Down(Down))
-import Data.List (sortOn)
+import Data.Maybe (mapMaybe)
 import qualified Data.Set as S
 import Intcode (parse, CompilerState, runC, getOutput)
 

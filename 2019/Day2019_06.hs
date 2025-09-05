@@ -2,7 +2,6 @@ module Day2019_06 where
 
 import Data.List.Split (splitOn)
 import Data.Either (rights)
-import Data.Maybe (listToMaybe, mapMaybe)
 
 main :: IO ()
 main = do
@@ -46,8 +45,8 @@ getAllOrbits :: Tree -> Int
 getAllOrbits (Node y []) = 0
 getAllOrbits (Node y ys) = sum (map size ys) + sum (map getAllOrbits ys)
     where
-        size (Node y []) = 1
-        size (Node y ys) = 1 + sum (map size ys)
+        size (Node y' []) = 1
+        size (Node y' ys') = 1 + sum (map size ys')
 
 distance :: String -> String -> Tree -> Int
 distance a b tree@(Node y ys) = case filter (\t -> member a t && member b t) ys of

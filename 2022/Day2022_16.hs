@@ -2,7 +2,7 @@ module Day2022_16 where
 
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (mapMaybe, fromJust)
+import Data.Maybe (fromJust)
 import qualified Data.Bifunctor
 import Data.List (sortOn)
 import Utility.AOC (shortestDistance)
@@ -43,7 +43,7 @@ move valves timeleft current
         (n,ns') = HM.lookupDefault (0,[]) current valves
         ns = sortOn snd ns'
         unopened = maximum' $ map (\(s,k) -> move valves (timeleft-k) s) $ filter ((<=timeleft) . snd) ns
-        opened = (+(n*(timeleft-1))) $ maximum' $ map (\(s,k) -> move (HM.adjust (\(n,ns) -> (0,ns)) current valves) (timeleft-k-1) s) $ filter ((<=timeleft-1) . snd) ns
+        opened = (+(n*(timeleft-1))) $ maximum' $ map (\(s,k) -> move (HM.adjust (\(_,ns'') -> (0,ns'')) current valves) (timeleft-k-1) s) $ filter ((<=timeleft-1) . snd) ns
 
 filterImportant :: Tunnels -> [(String, Int)]
 filterImportant = HM.toList . HM.map fst . HM.filterWithKey (\k v -> fst v > 0 || k == "AA")

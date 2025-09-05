@@ -16,7 +16,7 @@ parseWith f = foldr (\c acc -> HM.insertWith (+) c 1 acc) HM.empty . concatMap f
 
 helper :: String -> [(Int,Int)]
 helper line =
-    let [[a,b],[c,d]] = map (map read . splitOn ",") $ (\[a,b,c] -> [a,c]) $ words line
+    let [[a,b],[c,d]] = map (map read . splitOn ",") $ (\[x,y,z] -> [x,z]) $ words line
     in
         if a /= c && b /= d then [] else
             if a == c then map (a,) [min b d .. max b d] else
@@ -24,7 +24,7 @@ helper line =
 
 helper' :: String -> [(Int,Int)]
 helper' line =
-    let [[a,b],[c,d]] = map (map read . splitOn ",") $ (\[a,b,c] -> [a,c]) $ words line
+    let [[a,b],[c,d]] = map (map read . splitOn ",") $ (\[x,y,z] -> [x,z]) $ words line
     in
         if a /= c && b /= d then zip [min a c .. max a c] $ (if (b < d) == (a < c) then id else reverse) [min b d .. max b d] else
             if a == c then map (a,) [min b d .. max b d] else

@@ -1,7 +1,6 @@
 module Day2017_17 where
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust)
-import Data.Foldable (Foldable(foldl'))
 
 main :: IO ()
 main = do

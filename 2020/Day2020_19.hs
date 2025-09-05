@@ -3,7 +3,6 @@ module Day2020_19 where
 import Data.List.Split (splitOn)
 import qualified Data.HashMap.Strict as HM
 import Data.Maybe (fromJust)
-import Data.MemoUgly (memo)
 
 main :: IO ()
 main = do

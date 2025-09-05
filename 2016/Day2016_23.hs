@@ -2,7 +2,6 @@ module Day2016_23 where
 import qualified Data.HashMap.Internal.Strict as HM
 import Text.Read (readMaybe)
 import Data.Maybe (fromJust)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

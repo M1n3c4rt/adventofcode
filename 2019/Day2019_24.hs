@@ -1,6 +1,6 @@
 module Day2019_24 where
 import qualified Data.Set as S
-import Utility.AOC (enumerateFilter, neighbours4, extrapolate)
+import Utility.AOC (enumerateFilter, neighbours4)
 
 main :: IO ()
 main = do

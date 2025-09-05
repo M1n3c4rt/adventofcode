@@ -12,7 +12,7 @@ readSNAFU :: String -> Int
 readSNAFU s = r $ reverse s
     where
         r "" = 0
-        r (s:ss) = n s + 5 * r ss
+        r (c:ss) = n c + 5 * r ss
             where
                 n s' = case s' of
                     '=' -> -2

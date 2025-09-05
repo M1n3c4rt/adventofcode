@@ -1,6 +1,5 @@
 module Day2015_13 where
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (mapMaybe, catMaybes)
 import Data.List (permutations)
 
 main :: IO ()

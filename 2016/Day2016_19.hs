@@ -1,5 +1,4 @@
 module Day2016_19 where
-import Debug.Trace (traceShow, trace)
 import Utility.AOC (takeEvery)
 
 main :: IO ()

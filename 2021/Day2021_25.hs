@@ -1,7 +1,6 @@
 module Day2021_25 where
 
 import qualified Data.HashMap.Strict as HM
-import Data.Maybe (isJust)
 
 main :: IO ()
 main = do

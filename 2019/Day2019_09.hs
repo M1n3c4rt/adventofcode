@@ -1,8 +1,5 @@
 module Day2019_09 where
 
-import qualified Data.HashMap.Strict as HM
-import Data.Maybe (fromJust)
-import Data.List.Split (splitOn)
 import Intcode ( parse, runC, getOutput ) 
 
 main :: IO ()

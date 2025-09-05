@@ -47,8 +47,8 @@ key =
 
 decode :: String -> String -> Int
 decode pass text =
-    let lookup = HM.fromList $ zip pass "abcdefg"
-        transformed = sort $ map (\c -> HM.lookupDefault 'a' c lookup) text
+    let lookup' = HM.fromList $ zip pass "abcdefg"
+        transformed = sort $ map (\c -> HM.lookupDefault 'a' c lookup') text
     in HM.lookupDefault 0 transformed key
 
 decodeM :: String -> [String] -> Int

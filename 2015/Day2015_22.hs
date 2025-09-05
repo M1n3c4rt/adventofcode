@@ -1,8 +1,6 @@
 module Day2015_22 where
-import Utility.AOC (numbers, floodFill, traceSleepSeconds)
-import Debug.Trace (traceShow)
-import System.Random (getStdGen, Random (randomR), newStdGen)
-import Data.Maybe (catMaybes)
+import Utility.AOC (numbers)
+import System.Random (Random (randomR), newStdGen)
 
 main :: IO ()
 main = do
@@ -51,8 +49,7 @@ updateState hardMode playerTurn (n',state) = applyEffects
     where
         initState = if playerTurn then state {hp = hp state - if hardMode then 1 else 0} else state {hp = hp state - bossdmg state}
         expired = initState {bosshp = if hp initState == 0 then 500 else bosshp initState {-this is a terrible hack i am so sorry-}, effects = filter (\(_,_,d,_) -> d > 0) $ effects initState}
-        activeSpells = map getMana $ effects expired
-        candidates = if playerTurn then filter (\(b,m,d,f) -> m `notElem` map getMana (filter (\(_,_,d,_) -> d > 1) $ effects initState) && m <= mana expired) spells else []
+        candidates = if playerTurn then filter (\(b,m,d,f) -> m `notElem` map getMana (filter (\(_,_,d',_) -> d' > 1) $ effects initState) && m <= mana expired) spells else []
         insertCandidates = map (\c -> (getMana c,expired {mana = mana expired - getMana c,effects = c:effects expired})) candidates
         applyEffects = map (\(n,s) -> (n'+n,) $ (\s' -> s' {effects = map (\(b,m,d,f) -> (True,m,if b then d-1 else d,f)) (effects s')}) $ foldr (\(b,m,d,f) acc -> if b && not (m == 113 && playerTurn) then f acc else acc) s (effects s)) (insertCandidates ++ [(0,expired) | null candidates])
         getMana (_,m,_,_) = m
@@ -60,10 +57,9 @@ updateState hardMode playerTurn (n',state) = applyEffects
 floodFillGoal :: Bool -> Bool -> [(Int, State)] -> [(Int, State)]
 floodFillGoal hardMode parity frontier = if null frontier then [] else won ++ floodFillGoal hardMode (not parity) (concatMap (updateState hardMode parity) rest)
     where
-        lost = filter (\(_,s) -> hp s <= 0) frontier
         won = filter (\(_,s) -> bosshp s <= 0) frontier
         rest = filter (\(_,s) -> hp s > 0 && bosshp s > 0) frontier
 
 instance Show State where
     show :: State -> String
-    show (State efs h m h' d') = show (map (\(b,m,d,_) -> (b,m,d)) efs,h,m,h',d')
+    show (State efs h m h' d') = show (map (\(b,m',d,_) -> (b,m',d)) efs,h,m,h',d')

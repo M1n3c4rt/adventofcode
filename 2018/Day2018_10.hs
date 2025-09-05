@@ -1,8 +1,6 @@
 module Day2018_10 where
 import Data.List.Split (splitOn)
 import qualified Data.Set as S
-import Data.List (isInfixOf)
-import Control.Monad (when)
 
 main :: IO ()
 main = do
@@ -18,7 +16,7 @@ pprints n ps = do
     if lineV 10 grid then do putStrLn $ pprint grid; print n else pprints (n+1) $ map (\((x,y),(p,q)) -> ((x+p,y+q),(p,q))) ps
 
 parse :: String -> ((Int,Int),(Int,Int))
-parse line = let [a,b,c,d,e] = concatMap (splitOn ">") $ splitOn "<" line in (read $ "("++b++")",read $ "("++d++")")
+parse l = let [a,b,c,d,e] = concatMap (splitOn ">") $ splitOn "<" l in (read $ "("++b++")",read $ "("++d++")")
 
 line n grid = any (\(x,y) -> all ((`S.member` grid) . (,y)) [x..x+n-1]) grid
 lineV n grid = any (\(x,y) -> all ((`S.member` grid) . (x,)) [y..y+n-1]) grid

@@ -1,8 +1,7 @@
 module Day2016_20 where
-import Utility.AOC (numbers', rangeIntersect)
+import Utility.AOC (numbers')
 import Data.List (sortOn)
 import Data.Word (Word32)
-import Debug.Trace (traceShow)
 
 main :: IO ()
 main = do

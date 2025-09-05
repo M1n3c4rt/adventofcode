@@ -1,7 +1,6 @@
 module Day2023_12 where
 
 import Data.List.Split (splitOn)
-import qualified Data.Set as S
 import Data.MemoUgly (memo)
 import Data.List (intercalate)
 

@@ -1,5 +1,4 @@
 module Day2015_17 where
-import Utility.AOC (memo2)
 import Data.List (sortOn)
 import Data.Ord (Down(Down))
 import Data.List.Extra (groupOn)

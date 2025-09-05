@@ -1,6 +1,5 @@
 module Day2020_13 where
 
-import Data.Numbers.Primes (isPrime)
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
 import Data.Function (on)

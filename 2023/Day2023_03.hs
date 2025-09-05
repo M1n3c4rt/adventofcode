@@ -20,14 +20,14 @@ getNumbersWithCoords :: [[Char]] -> [(Int, Int, Int)]
 getNumbersWithCoords sss = concat $ zipWith (\ls y -> map (\(x,n) -> (x,y,n)) ls) (map (getNumbersWithCoords' 0) sss) [0..]
 
 checkNeighbours :: [[Char]] -> (Int, Int, Int) -> Bool
-checkNeighbours sss (x,y,n) = any (\(x,y) -> sss !! y !! x `notElem` "0123456789.") $ getNeighbours (x,y,n)
+checkNeighbours sss (x,y,n) = any (\(x',y') -> sss !! y' !! x' `notElem` "0123456789.") $ getNeighbours (x,y,n)
 
 addGear :: [[Char]] -> HM.HashMap (Int,Int) (Int,Int) -> (Int, Int, Int) -> HM.HashMap (Int,Int) (Int,Int)
-addGear sss m (x,y,n) = let gears = filter (\(x,y) -> sss !! y !! x == '*') $ getNeighbours (x,y,n) in
+addGear sss m (x,y,n) = let gears = filter (\(x',y') -> sss !! y' !! x' == '*') $ getNeighbours (x,y,n) in
     foldl (\acc g -> HM.insertWith (\(num1,count1) (num2,count2) -> (num1*num2,count1+count2)) g (n,1) acc) m gears
 
 getGearSum :: HM.HashMap (Int,Int) (Int,Int) -> Int
 getGearSum = sum . HM.map fst . HM.filter (\(n,c) -> c > 1)
 
 getNeighbours :: (Int, Int, Int) -> [(Int, Int)]
-getNeighbours (x,y,n) = filter (\(x,y) -> min x y > -1 && max x y < 140) $ nub $ concatMap ((\(x,y) -> [(x+1,y),(x-1,y),(x,y+1),(x,y-1),(x+1,y-1),(x-1,y+1),(x-1,y-1),(x+1,y+1)]) . (\k -> (x+k,y))) [0..length (show n)-1]
+getNeighbours (a,b,n) = filter (\(x,y) -> min x y > -1 && max x y < 140) $ nub $ concatMap ((\(x,y) -> [(x+1,y),(x-1,y),(x,y+1),(x,y-1),(x+1,y-1),(x-1,y+1),(x-1,y-1),(x+1,y+1)]) . (\k -> (a+k,b))) [0..length (show n)-1]

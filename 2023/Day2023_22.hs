@@ -49,21 +49,21 @@ bricksDirectlyBelow bricks brick =
         candidates = HM.filter (\v -> aligned brick v && below brick v) bricks in HM.keys candidates
 
 moveDown :: Bricks -> [(Int,Brick)] -> Bricks -> [(Int,Brick)] -> Bricks
-moveDown all ((i,brick):bricks) finished unfinished
+moveDown all' ((i,brick):bricks) finished unfinished
     | below == [[(0,0,0)]] = let newbrick = helper b 0 brick in
-        moveDown (HM.insert i newbrick all) bricks (HM.insert i newbrick finished) unfinished
+        moveDown (HM.insert i newbrick all') bricks (HM.insert i newbrick finished) unfinished
     | any (`elem` finished) below =
         let t = top $ head below
             newbrick = helper b t brick
-        in moveDown (HM.insert i newbrick all) bricks (HM.insert i newbrick finished) unfinished
-    | otherwise = moveDown all bricks finished ((i,brick):unfinished)
-    where below = bricksBelow all i
+        in moveDown (HM.insert i newbrick all') bricks (HM.insert i newbrick finished) unfinished
+    | otherwise = moveDown all' bricks finished ((i,brick):unfinished)
+    where below = bricksBelow all' i
           b = bottom brick
-          helper p q = map (\(a,b,c) -> (a,b,c-(p-q-1)))
+          helper p q = map (\(a,b',c) -> (a,b',c-(p-q-1)))
 
-moveDown all [] finished unfinished
+moveDown all' [] finished unfinished
     | null unfinished = finished
-    | otherwise = moveDown all (sortOn (top . snd) unfinished) finished []
+    | otherwise = moveDown all' (sortOn (top . snd) unfinished) finished []
 
 unsafeBricks :: HM.HashMap Int [Int] -> Int
 unsafeBricks = length . nub . HM.foldr (\[c] acc -> c:acc) [] . HM.filter ((==1) . length)

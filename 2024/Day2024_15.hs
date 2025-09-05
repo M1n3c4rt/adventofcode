@@ -58,10 +58,10 @@ moveLeft :: (Int, Int) -> [[Char]] -> [[Char]]
 moveLeft (x,y) l = take y l ++ [reverse $ move (length (head l) - 1 - x) $ reverse (l !! y)] ++ drop (y+1) l
 
 moveDown :: (Int, Int) -> [[Char]] -> [[Char]]
-moveDown (x,y) l = zipWith3 (\ x y z -> x ++ [y] ++ z) (map (take x) l) (move y $ map (!!x) l) (map (drop (x+1)) l)
+moveDown (x,y) l = zipWith3 (\ x' y' z' -> x' ++ [y'] ++ z') (map (take x) l) (move y $ map (!!x) l) (map (drop (x+1)) l)
 
 moveUp :: (Int, Int) -> [[Char]] -> [[Char]]
-moveUp (x,y) l = zipWith3 (\ x y z -> x ++ [y] ++ z) (map (take x) l) (reverse $ move (length l - 1 - y) $ reverse $ map (!!x) l) (map (drop (x+1)) l)
+moveUp (x,y) l = zipWith3 (\ x' y' z' -> x' ++ [y'] ++ z') (map (take x) l) (reverse $ move (length l - 1 - y) $ reverse $ map (!!x) l) (map (drop (x+1)) l)
 
 findDownM :: Int -> (Int, Int) -> [[Char]] -> [(Int, Int)]
 findDownM n (x,0) (rr:ss:sss)
