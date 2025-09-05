@@ -8,7 +8,8 @@ main = do
     let ps = map parse $ lines contents
         mul = (\((x,y),(p,q)) -> (-(x `div` p)) - 200) $ head ps
         ps' = map (\((x,y),(p,q)) -> ((x+mul*p,y+mul*q),(p,q))) ps
-    -- parts 1 & 2
+    -- part 1
+    -- part 2
     pprints 0 ps
 
 pprints n ps = do

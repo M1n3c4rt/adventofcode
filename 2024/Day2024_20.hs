@@ -32,12 +32,12 @@ getGraph :: [[Char]] -> HM.HashMap Node Int
 getGraph l = HM.fromList $ getNext [(findS $ enumerate l,0)] l
 
 getCheats :: Int -> Int -> HM.HashMap Node Int -> Int
-getCheats n min graph = sum $ HM.elems $ HM.mapWithKey (\k v -> getCheat 1 n min k v graph) graph
+getCheats n min' graph = sum $ HM.elems $ HM.mapWithKey (\k v -> getCheat 1 n min' k v graph) graph
 
 getCheat :: Int -> Int -> Int -> Node -> Int -> HM.HashMap Node Int -> Int
-getCheat step n min (x,y) dist graph
+getCheat step n min' (x,y) dist graph
     | step > n = 0
-    | otherwise = getCheat (step+1) n min (x,y) dist graph + length (filter (\m -> m-dist-step >= min) $ filter (/=(-1)) $ map (\node -> HM.findWithDefault (-1) node graph) $ genSquare (x,y) step)
+    | otherwise = getCheat (step+1) n min' (x,y) dist graph + length (filter (\m -> m-dist-step >= min') $ filter (/=(-1)) $ map (\node -> HM.findWithDefault (-1) node graph) $ genSquare (x,y) step)
 
 genSquare :: Node -> Int -> [Node]
 genSquare (x,y) n = [(x+k,y+n-k) | k <- [0..n-1]] ++ [(x+n-k,y-k) | k <- [0..n-1]] ++ [(x-k,y-n+k) | k <- [0..n-1]] ++ [(x-n+k,y+k) | k <- [0..n-1]]
