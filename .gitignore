@@ -8,3 +8,5 @@ test.hs
 dist-newstyle
 main
 *.zip
+glpk-hs
+cabal.project
